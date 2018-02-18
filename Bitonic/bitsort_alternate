@@ -1,0 +1,251 @@
+#include "bitsort.h"
+int a[8];
+int temp;
+//int a[8];
+
+//void bitonic21(int i)
+//{
+//	if(a[i]>a[i+1])
+//{temp=a[i+1];
+//a[i+1]=a[i];
+//a[i]=temp;
+//}
+//}
+//void bitonic22(int i)
+//{
+//if(a[i]<a[i+1])
+//{temp=a[i+1];
+//a[i+1]=a[i];
+//a[i]=temp;
+//}
+//}
+//void bitonic4()
+//{
+//
+//	if(a[0]>a[2])
+//		{
+//			temp=a[2];
+//			a[2]=a[0];
+//			a[0]=temp;
+//		}
+//	if(a[1]>a[3])
+//			{
+//				temp=a[1];
+//				a[1]=a[3];
+//				a[3]=temp;
+//			}
+//	if(a[0]>a[1])
+//		{temp=a[1];
+//		a[1]=a[0];
+//		a[0]=temp;
+//		}
+//		if(a[2]>a[3])
+//		{temp=a[3];
+//		a[3]=a[2];
+//		a[2]=temp;
+//		}
+////		bitonic21(i);
+////		bitonic21(i+2);
+//
+//		if(a[4]<a[6])
+//				{
+//					temp=a[6];
+//					a[6]=a[4];
+//					a[4]=temp;
+//				}
+//			if(a[5]<a[7])
+//					{
+//						temp=a[5];
+//						a[5]=a[7];
+//						a[7]=temp;
+//					}
+//			if(a[4]<a[5])
+//					{temp=a[5];
+//					a[5]=a[4];
+//					a[4]=temp;
+//					}
+//					if(a[6]<a[7])
+//					{temp=a[7];
+//					a[7]=a[6];
+//					a[6]=temp;
+//					}
+//					bitonic8();
+//}
+//void bitonic42(int i)
+//{
+//	if(a[i]<a[i+2])
+//		{
+//			temp=a[i+2];
+//			a[i+2]=a[i];
+//			a[i]=temp;
+//		}
+//	if(a[i+1]<a[i+3])
+//			{
+//				temp=a[i+1];
+//				a[i+1]=a[i+3];
+//				a[i+3]=temp;
+//			}
+//
+//		bitonic22(i);
+//		bitonic22(i+2);
+//
+//}
+void bitonic8()
+{
+#pragma HLS dataflow
+
+	if(a[0]>a[4])
+		{
+			temp=a[4];
+			a[4]=a[0];
+			a[0]=temp;
+		}
+	if(a[1]>a[5])
+			{
+				temp=a[1];
+				a[1]=a[5];
+				a[5]=temp;
+			}
+	if(a[2]>a[6])
+			{
+				temp=a[6];
+				a[6]=a[2];
+				a[2]=temp;
+			}
+	if(a[3]>a[7])
+			{
+				temp=a[3];
+				a[3]=a[7];
+				a[7]=temp;
+			}
+
+	if(a[4]>a[6])
+					{
+						temp=a[6];
+						a[6]=a[4];
+						a[4]=temp;
+					}
+				if(a[5]>a[7])
+						{
+							temp=a[5];
+							a[5]=a[7];
+							a[7]=temp;
+						}
+				if(a[4]>a[5])
+						{temp=a[5];
+						a[5]=a[4];
+						a[4]=temp;
+						}
+					if(a[6]>a[7])
+						{temp=a[7];
+						a[7]=a[6];
+						a[6]=temp;
+						}
+
+
+}
+void bitonic4()
+{
+#pragma HLS dataflow
+
+	if(a[0]>a[2])
+		{
+			temp=a[2];
+			a[2]=a[0];
+			a[0]=temp;
+		}
+	if(a[1]>a[3])
+			{
+				temp=a[1];
+				a[1]=a[3];
+				a[3]=temp;
+			}
+	if(a[0]>a[1])
+		{temp=a[1];
+		a[1]=a[0];
+		a[0]=temp;
+		}
+		if(a[2]>a[3])
+		{temp=a[3];
+		a[3]=a[2];
+		a[2]=temp;
+		}
+//		bitonic21(i);
+//		bitonic21(i+2);
+
+		if(a[4]<a[6])
+				{
+					temp=a[6];
+					a[6]=a[4];
+					a[4]=temp;
+				}
+			if(a[5]<a[7])
+					{
+						temp=a[5];
+						a[5]=a[7];
+						a[7]=temp;
+					}
+			if(a[4]<a[5])
+					{temp=a[5];
+					a[5]=a[4];
+					a[4]=temp;
+					}
+					if(a[6]<a[7])
+					{temp=a[7];
+					a[7]=a[6];
+					a[6]=temp;
+					}
+					bitonic8();
+
+}
+void bitsort(int b[8])
+{
+#pragma HLS PIPELINE II=6
+#pragma HLS ARRAY_PARTITION variable=a complete dim=0
+#pragma HLS dataflow
+for(int i=0;i<8;i++)
+{
+#pragma HLS unroll
+	a[i]=b[i];
+}
+	if(a[0]>a[1])
+	{temp=a[1];
+	a[1]=a[0];
+	a[0]=temp;
+	}
+	if(a[2]<a[3])
+	{temp=a[3];
+	a[3]=a[2];
+	a[2]=temp;
+	}
+	if(a[4]>a[5])
+		{temp=a[5];
+		a[5]=a[4];
+		a[4]=temp;
+		}
+		if(a[6]<a[7])
+		{temp=a[7];
+		a[7]=a[6];
+		a[6]=temp;
+		}
+		bitonic4();
+//		bitonic21(0);
+//		bitonic22(2);
+//		bitonic21(4);
+//		bitonic22(6);
+//
+//	 bitonic41(0);
+//	 bitonic42(4);
+//	 bitonic8();
+		for(int i=0;i<8;i++)
+		{
+		#pragma HLS unroll
+			b[i]=a[i];
+		}
+
+
+
+}
+
+
+
