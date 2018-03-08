@@ -1,5 +1,5 @@
 #include<stdio.h>
 #include<math.h>
 #include <stdint.h>
-int a[8];
-void bitsort();
+void bitsort(int b[128]);
+	 
