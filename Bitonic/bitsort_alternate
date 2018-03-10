@@ -1,52 +1,435 @@
 #include "bitsort.h"
-int a[128];
+int a[128];// Global array variable used; doesn't waste clock cycles in copying the array between functions
+//hardcoding the blocks of the recursive algorithm necessary to reduce clock cycles.
 void bitonic128()
-{
+{// sorting the entire input array
 int temp;
 #pragma HLS dataflow
 for (int i=0;i<64;i++)
 {
 	#pragma HLS unroll
-	if(a[i]<a[i+64])
+	if(a[i]>a[i+64])
 		{
 			temp=a[i+64];
 			a[i+64]=a[i];
 			a[i]=temp;
 		}
 		}
-for (int i=0;i<32;i++)
-{
+for(int i=0;i<32;i++)
+	{
 	#pragma HLS unroll
-	if(a[i]<a[i+32])
+	if(a[i]>a[i+32])
 		{
 			temp=a[i+32];
 			a[i+32]=a[i];
 			a[i]=temp;
 		}
 		}
-for (int i=0;i<16;i++)
-{
+	 for(int i=64;i<96;i++)
+	{
 	#pragma HLS unroll
-	if(a[i]<a[i+16])
+	if(a[i]>a[i+32])
 		{
-			temp=a[i+16];
-			a[i+16]=a[i];
+			temp=a[i+32];
+			a[i+32]=a[i];
 			a[i]=temp;
 		}
 		}
-for (int i=0;i<8;i++)
-{
-	#pragma HLS unroll
-	if(a[i]<a[i+8])
+	 for(int i=0;i<16;i++)
+	 {
+	 #pragma HLS unroll
+	 		if(a[i]>a[i+16])
+	 		{
+	 			temp=a[i+16];
+	 			a[i+16]=a[i];
+	 			a[i]=temp;
+	 		}
+	 	}
+
+	 	for(int i=32;i<48;i++)
+	 {
+	 #pragma HLS unroll
+	 	if(a[i]>a[i+16])
+	 	{
+	 		temp=a[i+16];
+	 		a[i+16]=a[i];
+	 		a[i]=temp;
+	 	}
+	 }
+	 for(int i=64;i<80;i++)
+	 {
+	 #pragma HLS unroll
+	 	if(a[i]>a[i+16])
+	 	{
+	 		temp=a[i+16];
+	 		a[i+16]=a[i];
+	 		a[i]=temp;
+	 	}
+	 }
+	 	for(int i=96;i<112;i++)
+	 {
+	 #pragma HLS unroll
+	 	if(a[i]>a[i+16])
+	 	{
+	 		temp=a[i+16];
+	 		a[i+16]=a[i];
+	 		a[i]=temp;
+	 	}
+	 }
+	 	for(int i=0;i<8;i++)
+	 		{
+	 	#pragma HLS unroll
+	 			if(a[i]>a[i+8])
+	 					{
+	 						temp=a[i+8];
+	 						a[i+8]=a[i];
+	 						a[i]=temp;
+	 					}
+	 		}
+	 		for(int i=16;i<24;i++)
+	 			{
+	 		#pragma HLS unroll
+	 				if(a[i]>a[i+8])
+	 						{
+	 							temp=a[i+8];
+	 							a[i+8]=a[i];
+	 							a[i]=temp;
+	 						}
+	 			}
+
+	 		for(int i=32;i<40;i++)
+	 		{
+	 	#pragma HLS unroll
+	 			if(a[i]>a[i+8])
+	 					{
+	 						temp=a[i+8];
+	 						a[i+8]=a[i];
+	 						a[i]=temp;
+	 					}
+	 		}
+	 		for(int i=48;i<56;i++)
+	 			{
+	 		#pragma HLS unroll
+	 				if(a[i]>a[i+8])
+	 						{
+	 							temp=a[i+8];
+	 							a[i+8]=a[i];
+	 							a[i]=temp;
+	 						}
+	 			}
+	 			for(int i=64;i<72;i++)
+	 		{
+	 	#pragma HLS unroll
+	 			if(a[i]>a[i+8])
+	 					{
+	 						temp=a[i+8];
+	 						a[i+8]=a[i];
+	 						a[i]=temp;
+	 					}
+	 		}
+	 			for(int i=80;i<88;i++)
+	 				{
+	 			#pragma HLS unroll
+	 					if(a[i]>a[i+8])
+	 							{
+	 								temp=a[i+8];
+	 								a[i+8]=a[i];
+	 								a[i]=temp;
+	 							}
+	 				}
+	 		for(int i=96;i<104;i++)
+	 		{
+	 	#pragma HLS unroll
+	 			if(a[i]>a[i+8])
+	 					{
+	 						temp=a[i+8];
+	 						a[i+8]=a[i];
+	 						a[i]=temp;
+	 					}
+	 		}
+	 		for(int i=112;i<120;i++)
+	 			{
+	 		#pragma HLS unroll
+	 				if(a[i]>a[i+8])
+	 						{
+	 							temp=a[i+8];
+	 							a[i+8]=a[i];
+	 							a[i]=temp;
+	 						}
+	 			}
+	 		for(int i=0;i<4;i++)
+	 			{
+	 			#pragma HLS unroll
+	 			if(a[i]>a[i+4])
+	 				{
+	 					temp=a[i+4];
+	 					a[i+4]=a[i];
+	 					a[i]=temp;
+	 				}
+	 				}
+	 		 for(int i=8;i<12;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 		 for(int i=16;i<20;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 		 for(int i=24;i<28;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+
+	 					for(int i=32;i<36;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 		for(int i=40;i<44;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 		for(int i=48;i<52;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 		for(int i=56;i<60;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 				for(int i=64;i<68;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 				for(int i=72;i<76;i++)
+	 							{
+	 							#pragma HLS unroll
+	 							if(a[i]>a[i+4])
+	 								{
+	 									temp=a[i+4];
+	 									a[i+4]=a[i];
+	 									a[i]=temp;
+	 								}
+	 								}
+	 				for(int i=80;i<84;i++)
+	 							{
+	 							#pragma HLS unroll
+	 							if(a[i]>a[i+4])
+	 								{
+	 									temp=a[i+4];
+	 									a[i+4]=a[i];
+	 									a[i]=temp;
+	 								}
+	 								}
+	 				for(int i=88;i<92;i++)
+	 							{
+	 							#pragma HLS unroll
+	 							if(a[i]>a[i+4])
+	 								{
+	 									temp=a[i+4];
+	 									a[i+4]=a[i];
+	 									a[i]=temp;
+	 								}
+	 								}
+	 				for(int i=96;i<100;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 				for(int i=104;i<108;i++)
+	 							{
+	 							#pragma HLS unroll
+	 							if(a[i]>a[i+4])
+	 								{
+	 									temp=a[i+4];
+	 									a[i+4]=a[i];
+	 									a[i]=temp;
+	 								}
+	 								}
+	 				for(int i=112;i<116;i++)
+	 							{
+	 							#pragma HLS unroll
+	 							if(a[i]>a[i+4])
+	 								{
+	 									temp=a[i+4];
+	 									a[i+4]=a[i];
+	 									a[i]=temp;
+	 								}
+	 								}
+	 				for(int i=120;i<124;i++)
+	 							{
+	 							#pragma HLS unroll
+	 							if(a[i]>a[i+4])
+	 								{
+	 									temp=a[i+4];
+	 									a[i+4]=a[i];
+	 									a[i]=temp;
+	 								}
+	 								}
+for(int i=0;i<29;i=i+4)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+2])
+				{
+					temp=a[i+2];
+					a[i+2]=a[i];
+					a[i]=temp;
+				}
+				if(a[i+1]>a[i+3])
+				{
+					temp=a[i+3];
+					a[i+3]=a[i+1];
+					a[i+1]=temp;
+				}
+				}
+
+	for(int i=32;i<61;i=i+4)
 		{
-			temp=a[i+8];
-			a[i+8]=a[i];
-			a[i]=temp;
-		}
-		}
+		#pragma HLS unroll
+		if(a[i]>a[i+2])
+			{
+				temp=a[i+2];
+				a[i+2]=a[i];
+				a[i]=temp;
+			}
+			if(a[i+1]>a[i+3])
+			{
+				temp=a[i+3];
+				a[i+3]=a[i+1];
+				a[i+1]=temp;
+			}
+			}
+		for(int i=64;i<93;i=i+4)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+2])
+				{
+					temp=a[i+2];
+					a[i+2]=a[i];
+					a[i]=temp;
+				}
+				if(a[i+1]>a[i+3])
+				{
+					temp=a[i+3];
+					a[i+3]=a[i+1];
+					a[i+1]=temp;
+				}
+				}
+			for(int i=96;i<125;i=i+4)
+				{
+				#pragma HLS unroll
+				if(a[i]>a[i+2])
+					{
+						temp=a[i+2];
+						a[i+2]=a[i];
+						a[i]=temp;
+					}
+					if(a[i+1]>a[i+3])
+					{
+						temp=a[i+3];
+						a[i+3]=a[i+1];
+						a[i+1]=temp;
+					}
+					}
+
+
+
+		 for(int i=0;i<31;i=i+2)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+			}
+		for(int i=32;i<63;i=i+2)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+			}
+		for(int i=64;i<95;i=i+2)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+			}
+		for(int i=96;i<127;i=i+2)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+			}
+
 }
 void bitonic64()
-{
+{// sorting blocks of size 64
 	int temp;
 	#pragma HLS dataflow
 
@@ -465,7 +848,7 @@ void bitonic64()
 }
 
 void bitonic32()
-{
+{// sorting blocks of size 32
 	int temp;
 #pragma HLS dataflow
 for(int i=0;i<16;i++)
@@ -866,7 +1249,7 @@ for(int i=56;i<60;i++)
 bitonic64();
 }
 void bitonic16()
-{
+{// sorting blocks of size 16
 	int temp;
 #pragma HLS dataflow
 	for(int i=0;i<8;i++)
@@ -1350,7 +1733,7 @@ bitonic32();
 	}
 
 void bitonic8()
-{
+{// sorting blocks of size 8
 	int temp;
 #pragma HLS dataflow
 	for(int i=0;i<4;i++)
@@ -1936,7 +2319,7 @@ void bitonic4()
 {
 	int temp;
 #pragma HLS dataflow
-
+// comparators in blocks of 4
 	for(int i=0;i<2;i++)
 	{
 		#pragma HLS unroll
@@ -2518,7 +2901,7 @@ void bitonic4()
 }
 void bitsort(int b[128])
 {
-	int temp;
+	int temp;// temporary copying variable
 #pragma HLS PIPELINE II=6
 #pragma HLS ARRAY_PARTITION variable=a complete dim=0
 #pragma HLS ARRAY_PARTITION variable=b complete dim=0
@@ -2546,7 +2929,7 @@ a[i+2]=temp;
 }
 	}
 
-//	
+
 		// passing control to second level of quaternary comparators
 		bitonic4();
 		//copying sorted array back into output variable
