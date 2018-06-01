@@ -78,17 +78,7 @@ int main ()
 				 a[6+8][3]=33;
 				 a[7+8][3]=44;
 				 a[16][3]=1;
-				 // uint16_t StartPhi=0;
-				 // uint16_t StartEta=0;
-				 // for(uint16_t i=0;i<3;i++)
-		 		// {
-		 		// 	for(uint16_t j=0;j<4;j++)	
-		 		// 	{
-		 		// 		b[i][j]=a[i+StartEta][j+StartPhi];
-		 				
-		 		// 	}
-		 		// 	}
-
+				 
 
 		 TowerPeaks(a,cPhi,cEta);
 		 cout<<"Eta"
@@ -97,9 +87,7 @@ int main ()
 				{
 					cout << cEta[i]
                << "\t" <<  cPhi[i] <<"\t"<<  a[cEta[i]][cPhi[i]] << endl;
-						
-					
-			
+				
 				}
 		
 
