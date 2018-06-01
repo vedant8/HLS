@@ -1,11 +1,7 @@
 #include "HCALTower.h"
-uint16_t ClusterDeposits[32];// Global array variable used; doesn't waste clock cycles in copying the array between functions
-//hardcoding the blocks of the recursive algorithm necessary to reduce clock cycles.
 
-uint16_t ClusterEta[32];
-uint16_t ClusterPhi[32];
 
-void bitonic32()
+void bitonic32(uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
 {// sorting blocks of size 32
   int temp;
 // #pragma HLS dataflow
@@ -175,7 +171,7 @@ for(int i=0;i<16;i++)
       }
 
   }  
-void bitonic16()
+void bitonic16(uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
 {// sorting blocks of size 16
   int temp;
 // #pragma HLS dataflow
@@ -376,10 +372,10 @@ void bitonic16()
     }
 
 
-bitonic32();
+bitonic32(ClusterDeposits,ClusterEta,ClusterPhi);
   }
 
-void bitonic8()
+void bitonic8(uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
 {// sorting blocks of size 8
   int temp;
 // #pragma HLS dataflow
@@ -630,9 +626,9 @@ void bitonic8()
       }
   }
  
-bitonic16();
+bitonic16(ClusterDeposits,ClusterEta,ClusterPhi);
 }
-void bitonic4()
+void bitonic4(uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
 {
   int temp;
 // #pragma HLS dataflow
@@ -879,21 +875,19 @@ void bitonic4()
               }
   }
   
-  bitonic8();
+  bitonic8(ClusterDeposits,ClusterEta,ClusterPhi);
 
 }
 void getTowerPeaks3x4(uint16_t towerETRegions[3][4],uint16_t cEta[5],
-                        uint16_t cPhi[5])
+                        uint16_t cPhi[5],uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
 {
   int temp;// temporary copying variable
 #pragma HLS PIPELINE II=6
+ 
 #pragma HLS ARRAY_PARTITION variable=cEta complete dim=0
  #pragma HLS ARRAY_PARTITION variable=cPhi complete dim=0
 #pragma HLS ARRAY_PARTITION variable=towerETRegions complete dim=0
-  #pragma HLS ARRAY_PARTITION variable=ClusterDeposits complete dim=0
- #pragma HLS ARRAY_PARTITION variable=ClusterEta complete dim=0
-  #pragma HLS ARRAY_PARTITION variable=ClusterPhi complete dim=0
-// #pragma HLS dataflow
+  
   //copying input array into global array
 // for(int i=0;i<128;i++)
 // {
@@ -948,7 +942,7 @@ ClusterPhi[i+3]=temp;
 
 
     // passing control to second level of quaternary comparators
-    bitonic4();
+    bitonic4(ClusterDeposits,ClusterEta,ClusterPhi);
     //copying sorted array back into output variable
 for(int i=0;i<5;i++)
 {
@@ -966,13 +960,22 @@ void TowerPeaks(uint16_t towerET[17][4],  uint16_t TowerPhi[30], uint16_t TowerE
 
 #pragma HLS ARRAY_PARTITION variable=TowerEta complete dim=0
 #pragma HLS ARRAY_PARTITION variable=TowerPhi complete dim=0
-
+ uint16_t ClusterDeposits[32];
+  uint16_t ClusterEta[32];
+  uint16_t ClusterPhi[32];
+#pragma HLS ARRAY_PARTITION variable=ClusterDeposits complete dim=0
+ #pragma HLS ARRAY_PARTITION variable=ClusterEta complete dim=0
+  #pragma HLS ARRAY_PARTITION variable=ClusterPhi complete dim=0
 uint16_t regions[3][4];
 #pragma HLS ARRAY_PARTITION variable=regions complete dim=0
 uint16_t regionEta[5];
 #pragma HLS ARRAY_PARTITION variable=regionEta complete dim=0
 uint16_t regionPhi[5];
 #pragma HLS ARRAY_PARTITION variable=regionPhi complete dim=0
+uint16_t Tower_1_Eta[30];
+#pragma HLS ARRAY_PARTITION variable=Tower_1_Eta complete dim=0
+uint16_t Tower_1_Phi[30];
+#pragma HLS ARRAY_PARTITION variable=Tower_1_Phi complete dim=0
 int x=0;
 for (int i=0;i<15;i=i+3)
 {
@@ -987,17 +990,17 @@ for (int i=0;i<15;i=i+3)
       }
   }
 
-getTowerPeaks3x4(regions,regionEta,regionPhi);
-TowerEta[x+0]=regionEta[0]+i;
-TowerEta[x+1]=regionEta[1]+i;
-TowerEta[x+2]=regionEta[2]+i;
-TowerEta[x+3]=regionEta[3]+i;
-TowerEta[x+4]=regionEta[4]+i;
-TowerPhi[x+0]=regionPhi[0];
-TowerPhi[x+1]=regionPhi[1];
-TowerPhi[x+2]=regionPhi[2];
-TowerPhi[x+3]=regionPhi[3];
-TowerPhi[x+4]=regionPhi[4];
+getTowerPeaks3x4(regions,regionEta,regionPhi,ClusterDeposits,ClusterEta,ClusterPhi);
+Tower_1_Eta[x+0]=regionEta[0]+i;
+Tower_1_Eta[x+1]=regionEta[1]+i;
+Tower_1_Eta[x+2]=regionEta[2]+i;
+Tower_1_Eta[x+3]=regionEta[3]+i;
+Tower_1_Eta[x+4]=regionEta[4]+i;
+Tower_1_Phi[x+0]=regionPhi[0];
+Tower_1_Phi[x+1]=regionPhi[1];
+Tower_1_Phi[x+2]=regionPhi[2];
+Tower_1_Phi[x+3]=regionPhi[3];
+Tower_1_Phi[x+4]=regionPhi[4];
 x=x+5;
 }
 for (int j=0;j<2;j++)
@@ -1013,70 +1016,76 @@ for (int j=0;j<2;j++)
   regions[2][1]=0;
   regions[2][2]=0;
   regions[2][3]=0;
-  getTowerPeaks3x4(regions,regionEta,regionPhi);
-TowerEta[25+0]=regionEta[0]+15;
-TowerEta[25+1]=regionEta[1]+15;
-TowerEta[25+2]=regionEta[2]+15;
-TowerEta[25+3]=regionEta[3]+15;
-TowerEta[25+4]=regionEta[4]+15;
-TowerPhi[25+0]=regionPhi[0];
-TowerPhi[25+1]=regionPhi[1];
-TowerPhi[25+2]=regionPhi[2];
-TowerPhi[25+3]=regionPhi[3];
-TowerPhi[25+4]=regionPhi[4];
+  getTowerPeaks3x4(regions,regionEta,regionPhi,ClusterDeposits,ClusterEta,ClusterPhi);
+Tower_1_Eta[25+0]=regionEta[0]+15;
+Tower_1_Eta[25+1]=regionEta[1]+15;
+Tower_1_Eta[25+2]=regionEta[2]+15;
+Tower_1_Eta[25+3]=regionEta[3]+15;
+Tower_1_Eta[25+4]=regionEta[4]+15;
+Tower_1_Phi[25+0]=regionPhi[0];
+Tower_1_Phi[25+1]=regionPhi[1];
+Tower_1_Phi[25+2]=regionPhi[2];
+Tower_1_Phi[25+3]=regionPhi[3];
+Tower_1_Phi[25+4]=regionPhi[4];
+uint16_t ClusterDeposits2[32];
+  uint16_t ClusterEta2[32];
+  uint16_t ClusterPhi2[32];
+#pragma HLS ARRAY_PARTITION variable=ClusterDeposits2 complete dim=0
+ #pragma HLS ARRAY_PARTITION variable=ClusterEta2 complete dim=0
+  #pragma HLS ARRAY_PARTITION variable=ClusterPhi2 complete dim=0
 for(int i=0;i<30;i++)
 {
-  ClusterDeposits[i]=towerET[TowerEta[i]][TowerPhi[i]];
-  ClusterEta[i]=TowerEta[i];
-  ClusterPhi[i]=TowerPhi[i];
+  ClusterDeposits2[i]=towerET[Tower_1_Eta[i]][Tower_1_Phi[i]];
+  ClusterEta2[i]=Tower_1_Eta[i];
+  ClusterPhi2[i]=Tower_1_Phi[i];
 }
-ClusterDeposits[30]=0;
-ClusterDeposits[31]=0;
-ClusterEta[30]=0;
-ClusterEta[31]=0;
-ClusterPhi[30]=0;
-ClusterPhi[31]=0;
+ClusterDeposits2[30]=0;
+ClusterDeposits2[31]=0;
+ClusterEta2[30]=0;
+ClusterEta2[31]=0;
+ClusterPhi2[30]=0;
+ClusterPhi2[31]=0;
 
 int temp=0;
 //first level of binary comparators
 for(int i=0;i<32;i=i+4)
 {
 #pragma HLS unroll
-if(ClusterDeposits[i]>ClusterDeposits[i+1])
-{temp=ClusterDeposits[i+1];
-ClusterDeposits[i+1]=ClusterDeposits[i];
-ClusterDeposits[i]=temp;
-temp=ClusterEta[i];
-ClusterEta[i]=ClusterEta[i+1];
-ClusterEta[i+1]=temp;
-temp=ClusterPhi[i];
-ClusterPhi[i]=ClusterPhi[i+1];
-ClusterPhi[i+1]=temp;
+if(ClusterDeposits2[i]>ClusterDeposits2[i+1])
+{temp=ClusterDeposits2[i+1];
+ClusterDeposits2[i+1]=ClusterDeposits2[i];
+ClusterDeposits2[i]=temp;
+temp=ClusterEta2[i];
+ClusterEta2[i]=ClusterEta2[i+1];
+ClusterEta2[i+1]=temp;
+temp=ClusterPhi2[i];
+ClusterPhi2[i]=ClusterPhi2[i+1];
+ClusterPhi2[i+1]=temp;
 }
 
-if(ClusterDeposits[i+2]<ClusterDeposits[i+3])
-{temp=ClusterDeposits[i+3];
-ClusterDeposits[i+3]=ClusterDeposits[i+2];
-ClusterDeposits[i+2]=temp;
-temp=ClusterEta[i+2];
-ClusterEta[i+2]=ClusterEta[i+3];
-ClusterEta[i+3]=temp;
-temp=ClusterPhi[i+2];
-ClusterPhi[i+2]=ClusterPhi[i+3];
-ClusterPhi[i+3]=temp;
+if(ClusterDeposits2[i+2]<ClusterDeposits2[i+3])
+{temp=ClusterDeposits2[i+3];
+ClusterDeposits2[i+3]=ClusterDeposits2[i+2];
+ClusterDeposits2[i+2]=temp;
+temp=ClusterEta2[i+2];
+ClusterEta2[i+2]=ClusterEta2[i+3];
+ClusterEta2[i+3]=temp;
+temp=ClusterPhi2[i+2];
+ClusterPhi2[i+2]=ClusterPhi2[i+3];
+ClusterPhi2[i+3]=temp;
 
 }
   }
 
 
     // passing control to second level of quaternary comparators
-    bitonic4();
+    bitonic4(ClusterDeposits2,ClusterEta2,ClusterPhi2);
 
     for(int i=0;i<30;i++)
 {
 
-  TowerEta[i]=ClusterEta[31-i];
-  TowerPhi[i]=ClusterPhi[31-i];
+  TowerEta[i]=ClusterEta2[31-i];
+  TowerPhi[i]=ClusterPhi2[31-i];
 }
 }
 
