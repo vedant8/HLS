@@ -1,5 +1,7 @@
 #include "HCALTower.h"
-void bitonic_1_16(uint16_t Cluster_1_Deposits[16], uint16_t Cluster_1_Eta[16], uint16_t Cluster_1_Phi[16])
+#include "Calib_LUT.h"
+
+void bitonic_1_16( uint16_t Cluster_1_Deposits[16], uint16_t Cluster_1_Eta[16], uint16_t Cluster_1_Phi[16])
 {// sorting blocks of size 16
   int temp;
 // #pragma HLS dataflow
@@ -111,7 +113,7 @@ void bitonic_1_16(uint16_t Cluster_1_Deposits[16], uint16_t Cluster_1_Eta[16], u
 
   }
 
-void bitonic_1_8(uint16_t Cluster_1_Deposits[16], uint16_t Cluster_1_Eta[16], uint16_t Cluster_1_Phi[16])
+void bitonic_1_8( uint16_t Cluster_1_Deposits[16], uint16_t Cluster_1_Eta[16], uint16_t Cluster_1_Phi[16])
 {// sorting blocks of size 8
   int temp;
 // #pragma HLS dataflow
@@ -240,7 +242,7 @@ void bitonic_1_8(uint16_t Cluster_1_Deposits[16], uint16_t Cluster_1_Eta[16], ui
   }
  bitonic_1_16(Cluster_1_Deposits,Cluster_1_Eta,Cluster_1_Phi);
 }
-void bitonic_1_4(uint16_t Cluster_1_Deposits[16], uint16_t Cluster_1_Eta[16], uint16_t Cluster_1_Phi[16])
+void bitonic_1_4( uint16_t Cluster_1_Deposits[16], uint16_t Cluster_1_Eta[16], uint16_t Cluster_1_Phi[16])
 {
   int temp;
 // #pragma HLS dataflow
@@ -370,7 +372,7 @@ void bitonic_1_4(uint16_t Cluster_1_Deposits[16], uint16_t Cluster_1_Eta[16], ui
   bitonic_1_8(Cluster_1_Deposits,Cluster_1_Eta,Cluster_1_Phi);
 
 }
-void bitonic32(uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
+void bitonic32( uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
 {// sorting blocks of size 32
   int temp;
 // #pragma HLS dataflow
@@ -540,7 +542,7 @@ for(int i=0;i<16;i++)
       }
 
   }  
-void bitonic16(uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
+void bitonic16( uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
 {// sorting blocks of size 16
   int temp;
 // #pragma HLS dataflow
@@ -744,7 +746,7 @@ void bitonic16(uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t C
 bitonic32(ClusterDeposits,ClusterEta,ClusterPhi);
   }
 
-void bitonic8(uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
+void bitonic8( uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
 {// sorting blocks of size 8
   int temp;
 // #pragma HLS dataflow
@@ -997,7 +999,7 @@ void bitonic8(uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t Cl
  
 bitonic16(ClusterDeposits,ClusterEta,ClusterPhi);
 }
-void bitonic4(uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
+void bitonic4( uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
 {
   int temp;
 // #pragma HLS dataflow
@@ -1247,12 +1249,12 @@ void bitonic4(uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t Cl
   bitonic8(ClusterDeposits,ClusterEta,ClusterPhi);
 
 }
-void getTowerPeaks3x4(uint16_t towerETRegions[3][4],uint16_t cEta[5],
+void getTowerPeaks3x4( uint16_t towerET_calRegions[3][4],uint16_t cEta[5],
                         uint16_t cPhi[5])
 {
   int temp;// temporary copying variable
-#pragma HLS PIPELINE II=6
- uint16_t Cluster_1_Deposits[16];
+#pragma HLS PIPELINE II=8
+  uint16_t Cluster_1_Deposits[16];
   uint16_t Cluster_1_Eta[16];
   uint16_t Cluster_1_Phi[16];
 #pragma HLS ARRAY_PARTITION variable=Cluster_1_Deposits complete dim=0
@@ -1260,7 +1262,7 @@ void getTowerPeaks3x4(uint16_t towerETRegions[3][4],uint16_t cEta[5],
   #pragma HLS ARRAY_PARTITION variable=Cluster_1_Phi complete dim=0
 #pragma HLS ARRAY_PARTITION variable=cEta complete dim=0
  #pragma HLS ARRAY_PARTITION variable=cPhi complete dim=0
-#pragma HLS ARRAY_PARTITION variable=towerETRegions complete dim=0
+#pragma HLS ARRAY_PARTITION variable=towerET_calRegions complete dim=0
   
  for(int i=0;i<16;i++)
   {
@@ -1274,7 +1276,7 @@ void getTowerPeaks3x4(uint16_t towerETRegions[3][4],uint16_t cEta[5],
 #pragma HLS UNROLL
     for(int tEta = 0; tEta < 3; tEta++) {
 #pragma HLS UNROLL
-      Cluster_1_Deposits[i] = towerETRegions[tEta][tPhi];
+      Cluster_1_Deposits[i] = towerET_calRegions[tEta][tPhi];
        Cluster_1_Phi[i]=tPhi;
       Cluster_1_Eta[i]=tEta;
      i++;
@@ -1328,17 +1330,88 @@ for(int i=0;i<5;i++)
 }
   
 
-
 }
-void TowerPeaks(uint16_t towerET[17][4],  uint16_t TowerPhi[30], uint16_t TowerEta[30])
+void TowerPeaks( uint16_t towerET_uncal[17][4],  uint16_t TowerPhi[30], uint16_t TowerEta[30])
 {
-#pragma HLS PIPELINE II=6
-#pragma HLS ARRAY_PARTITION variable=towerET complete dim=0
+#pragma HLS PIPELINE II=8
+#pragma HLS ARRAY_PARTITION variable=towerET_uncal complete dim=0
 
+ uint16_t towerET_cal [17][4];
+
+#pragma HLS ARRAY_PARTITION variable=towerET_cal complete dim=0
+for (int i=0;i<17;i++)
+{
+  for (int j=0;j<4;j++)
+  {
+    towerET_cal[i][j]=0;
+  }
+}
 #pragma HLS ARRAY_PARTITION variable=TowerEta complete dim=0
 #pragma HLS ARRAY_PARTITION variable=TowerPhi complete dim=0
- 
-uint16_t regions[3][4];
+
+//Calibration
+ for (int j=0;j<17;j++)
+  {
+  #pragma HLS UNROLL
+      for (int k=0;k<4;k++)
+      {
+      #pragma HLS UNROLL
+        if(towerET_uncal[j][k]<Calib_ET_Bins[0])
+         {
+          towerET_cal[j][k]=towerET_uncal[j][k]*Calib_LUT[0][j];
+         }
+        else if ((towerET_uncal[j][k]>Calib_ET_Bins[0])&&(towerET_uncal[j][k]<Calib_ET_Bins[1]))
+         {
+          towerET_cal[j][k]=towerET_uncal[j][k]*Calib_LUT[1][j];
+         } 
+        else if ((towerET_uncal[j][k]>Calib_ET_Bins[1])&&(towerET_uncal[j][k]<Calib_ET_Bins[2]))
+         {
+          towerET_cal[j][k]=towerET_uncal[j][k]*Calib_LUT[2][j];
+         }
+        else if ((towerET_uncal[j][k]>Calib_ET_Bins[2])&&(towerET_uncal[j][k]<Calib_ET_Bins[3]))
+         {
+          towerET_cal[j][k]=towerET_uncal[j][k]*Calib_LUT[3][j];
+         } 
+        else if ((towerET_uncal[j][k]>Calib_ET_Bins[3])&&(towerET_uncal[j][k]<Calib_ET_Bins[4]))
+         {
+          towerET_cal[j][k]=towerET_uncal[j][k]*Calib_LUT[4][j];
+         }
+        else if ((towerET_uncal[j][k]>Calib_ET_Bins[4])&&(towerET_uncal[j][k]<Calib_ET_Bins[5]))
+         {
+          towerET_cal[j][k]=towerET_uncal[j][k]*Calib_LUT[5][j];
+         } 
+        else if ((towerET_uncal[j][k]>Calib_ET_Bins[5])&&(towerET_uncal[j][k]<Calib_ET_Bins[6]))
+         {
+          towerET_cal[j][k]=towerET_uncal[j][k]*Calib_LUT[6][j];
+         }
+        else if ((towerET_uncal[j][k]>Calib_ET_Bins[6])&&(towerET_uncal[j][k]<Calib_ET_Bins[7]))
+         {
+          towerET_cal[j][k]=towerET_uncal[j][k]*Calib_LUT[7][j];
+         } 
+        else if ((towerET_uncal[j][k]>Calib_ET_Bins[7])&&(towerET_uncal[j][k]<Calib_ET_Bins[8]))
+         {
+          towerET_cal[j][k]=towerET_uncal[j][k]*Calib_LUT[8][j];
+         }
+        else if ((towerET_uncal[j][k]>Calib_ET_Bins[8])&&(towerET_uncal[j][k]<Calib_ET_Bins[9]))
+         {
+          towerET_cal[j][k]=towerET_uncal[j][k]*Calib_LUT[9][j];
+         } 
+        else if ((towerET_uncal[j][k]>Calib_ET_Bins[9])&&(towerET_uncal[j][k]<Calib_ET_Bins[10]))
+         {
+          towerET_cal[j][k]=towerET_uncal[j][k]*Calib_LUT[10][j];
+         }
+        else if ((towerET_uncal[j][k]>Calib_ET_Bins[10])&&(towerET_uncal[j][k]<Calib_ET_Bins[11]))
+         {
+          towerET_cal[j][k]=towerET_uncal[j][k]*Calib_LUT[11][j];
+         } 
+        else if ((towerET_uncal[j][k]>Calib_ET_Bins[11])&&(towerET_uncal[j][k]<Calib_ET_Bins[12]))
+         {
+          towerET_cal[j][k]=towerET_uncal[j][k]*Calib_LUT[12][j];
+         }
+
+      }
+  }
+ uint16_t regions[3][4];
 #pragma HLS ARRAY_PARTITION variable=regions complete dim=0
 uint16_t regionEta[5];
 #pragma HLS ARRAY_PARTITION variable=regionEta complete dim=0
@@ -1380,7 +1453,7 @@ for (int i=0;i<15;i=i+3)
       for (int k=0;k<4;k++)
       {
       #pragma HLS UNROLL
-        regions[j][k]=towerET[i+j][k];
+        regions[j][k]=towerET_cal[i+j][k];
       }
   }
 
@@ -1403,7 +1476,7 @@ for (int j=0;j<2;j++)
       for (int k=0;k<4;k++)
       {
       #pragma HLS UNROLL
-        regions[j][k]=towerET[j+15][k];
+        regions[j][k]=towerET_cal[j+15][k];
       }
   }
   regions[2][0]=0;
@@ -1421,7 +1494,7 @@ Tower_1_Phi[25+1]=regionPhi[1];
 Tower_1_Phi[25+2]=regionPhi[2];
 Tower_1_Phi[25+3]=regionPhi[3];
 Tower_1_Phi[25+4]=regionPhi[4];
-uint16_t ClusterDeposits2[32];
+ uint16_t ClusterDeposits2[32];
   uint16_t ClusterEta2[32];
   uint16_t ClusterPhi2[32];
   for(int i=0;i<32;i++)
@@ -1435,7 +1508,7 @@ uint16_t ClusterDeposits2[32];
   #pragma HLS ARRAY_PARTITION variable=ClusterPhi2 complete dim=0
 for(int i=0;i<30;i++)
 {
-  ClusterDeposits2[i]=towerET[Tower_1_Eta[i]][Tower_1_Phi[i]];
+  ClusterDeposits2[i]=towerET_cal[Tower_1_Eta[i]][Tower_1_Phi[i]];
   ClusterEta2[i]=Tower_1_Eta[i];
   ClusterPhi2[i]=Tower_1_Phi[i];
 }
