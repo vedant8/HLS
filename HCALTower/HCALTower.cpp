@@ -1,7 +1,7 @@
 #include "HCALTower.h"
 #include "Calib_LUT.h"
 
-void bitonic_1_16( uint16_t Cluster_1_Deposits[16], uint16_t Cluster_1_Eta[16], uint16_t Cluster_1_Phi[16])
+void bitonic_1_16( ap_fixed<16,9>   Cluster_1_Deposits[16], uint16_t Cluster_1_Eta[16], uint16_t Cluster_1_Phi[16])
 {// sorting blocks of size 16
   int temp;
 // #pragma HLS dataflow
@@ -113,7 +113,7 @@ void bitonic_1_16( uint16_t Cluster_1_Deposits[16], uint16_t Cluster_1_Eta[16], 
 
   }
 
-void bitonic_1_8( uint16_t Cluster_1_Deposits[16], uint16_t Cluster_1_Eta[16], uint16_t Cluster_1_Phi[16])
+void bitonic_1_8( ap_fixed<16,9>   Cluster_1_Deposits[16], uint16_t Cluster_1_Eta[16], uint16_t Cluster_1_Phi[16])
 {// sorting blocks of size 8
   int temp;
 // #pragma HLS dataflow
@@ -242,7 +242,7 @@ void bitonic_1_8( uint16_t Cluster_1_Deposits[16], uint16_t Cluster_1_Eta[16], u
   }
  bitonic_1_16(Cluster_1_Deposits,Cluster_1_Eta,Cluster_1_Phi);
 }
-void bitonic_1_4( uint16_t Cluster_1_Deposits[16], uint16_t Cluster_1_Eta[16], uint16_t Cluster_1_Phi[16])
+void bitonic_1_4( ap_fixed<16,9>   Cluster_1_Deposits[16], uint16_t Cluster_1_Eta[16], uint16_t Cluster_1_Phi[16])
 {
   int temp;
 // #pragma HLS dataflow
@@ -372,7 +372,7 @@ void bitonic_1_4( uint16_t Cluster_1_Deposits[16], uint16_t Cluster_1_Eta[16], u
   bitonic_1_8(Cluster_1_Deposits,Cluster_1_Eta,Cluster_1_Phi);
 
 }
-void bitonic32( uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
+void bitonic32( ap_fixed<16,9>   ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
 {// sorting blocks of size 32
   int temp;
 // #pragma HLS dataflow
@@ -542,7 +542,7 @@ for(int i=0;i<16;i++)
       }
 
   }  
-void bitonic16( uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
+void bitonic16( ap_fixed<16,9>   ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
 {// sorting blocks of size 16
   int temp;
 // #pragma HLS dataflow
@@ -746,7 +746,7 @@ void bitonic16( uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t 
 bitonic32(ClusterDeposits,ClusterEta,ClusterPhi);
   }
 
-void bitonic8( uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
+void bitonic8( ap_fixed<16,9>   ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
 {// sorting blocks of size 8
   int temp;
 // #pragma HLS dataflow
@@ -999,7 +999,7 @@ void bitonic8( uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t C
  
 bitonic16(ClusterDeposits,ClusterEta,ClusterPhi);
 }
-void bitonic4( uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
+void bitonic4( ap_fixed<16,9>   ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t ClusterPhi[32])
 {
   int temp;
 // #pragma HLS dataflow
@@ -1249,12 +1249,12 @@ void bitonic4( uint16_t ClusterDeposits[32], uint16_t ClusterEta[32], uint16_t C
   bitonic8(ClusterDeposits,ClusterEta,ClusterPhi);
 
 }
-void getTowerPeaks3x4( uint16_t towerET_calRegions[3][4],uint16_t cEta[5],
+void getTowerPeaks3x4( ap_fixed<16,9>   towerET_calRegions[3][4],uint16_t cEta[5],
                         uint16_t cPhi[5])
 {
   int temp;// temporary copying variable
 #pragma HLS PIPELINE II=8
-  uint16_t Cluster_1_Deposits[16];
+  ap_fixed<16,9>   Cluster_1_Deposits[16];
   uint16_t Cluster_1_Eta[16];
   uint16_t Cluster_1_Phi[16];
 #pragma HLS ARRAY_PARTITION variable=Cluster_1_Deposits complete dim=0
@@ -1336,7 +1336,7 @@ void TowerPeaks( uint16_t towerET_uncal[17][4],  uint16_t TowerPhi[30], uint16_t
 #pragma HLS PIPELINE II=8
 #pragma HLS ARRAY_PARTITION variable=towerET_uncal complete dim=0
 
- uint16_t towerET_cal [17][4];
+ ap_fixed<16,9>   towerET_cal [17][4];
 
 #pragma HLS ARRAY_PARTITION variable=towerET_cal complete dim=0
 for (int i=0;i<17;i++)
@@ -1411,7 +1411,7 @@ for (int i=0;i<17;i++)
 
       }
   }
- uint16_t regions[3][4];
+ ap_fixed<16,9>   regions[3][4];
 #pragma HLS ARRAY_PARTITION variable=regions complete dim=0
 uint16_t regionEta[5];
 #pragma HLS ARRAY_PARTITION variable=regionEta complete dim=0
@@ -1494,7 +1494,7 @@ Tower_1_Phi[25+1]=regionPhi[1];
 Tower_1_Phi[25+2]=regionPhi[2];
 Tower_1_Phi[25+3]=regionPhi[3];
 Tower_1_Phi[25+4]=regionPhi[4];
- uint16_t ClusterDeposits2[32];
+ ap_fixed<16,9>   ClusterDeposits2[32];
   uint16_t ClusterEta2[32];
   uint16_t ClusterPhi2[32];
   for(int i=0;i<32;i++)
