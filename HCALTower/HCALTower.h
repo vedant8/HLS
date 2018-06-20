@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<math.h>
 #include <stdint.h>
+#include <ap_fixed.h>
 const uint8_t NCaloLayer1Eta=17;
 const uint8_t NCaloLayer1Phi=4;
 
