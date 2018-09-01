@@ -1375,7 +1375,7 @@ bool getECAL_Clustersin3x4Region(ap_fixed<16,9> crystals_tower[3][4][5][5],
 			 &towerET1[tEta][tPhi],
 			 &ECAL_ClusterET1[tEta][tPhi]);
 			 
-      std::cout<<"tower eta: " << tEta<<" tower phi: "<<tPhi<<" peakEta1: "<<peakEta1[tEta][tPhi]<<" peakPhi1: "<<peakPhi1[tEta][tPhi]<<" ECAL_ClusterET: "<<ECAL_ClusterET1[tEta][tPhi]<<std::endl;
+     // std::cout<<"tower eta: " << tEta<<" tower phi: "<<tPhi<<" peakEta1: "<<peakEta1[tEta][tPhi]<<" peakPhi1: "<<peakPhi1[tEta][tPhi]<<" ECAL_ClusterET: "<<ECAL_ClusterET1[tEta][tPhi]<<std::endl;
       peakEta2[i]= peakEta1[tEta][tPhi];
       peakPhi2[i]= peakPhi1[tEta][tPhi];
 
@@ -1471,6 +1471,7 @@ bool getECAL_ClustersInTower(ap_fixed<16,9> crystals[NCrystalsPerEtaPhi][NCrysta
     for(int phi = 0; phi < NCrystalsPerEtaPhi; phi++) {
 #pragma HLS UNROLL
       etaStripSum[eta] += crystals[eta][phi];
+     // std::cout<<"etaStripSum"<<etaStripSum[eta]<<std::endl;
     }
   }
   // Large ECAL_Cluster ET is the ET of the full tower
@@ -1480,39 +1481,51 @@ bool getECAL_ClustersInTower(ap_fixed<16,9> crystals[NCrystalsPerEtaPhi][NCrysta
     *towerET += phiStripSum[phi];
   }
   *peakEta = getPeakBinOf5(etaStripSum, *towerET);
+  //std::cout<<"Peak Eta"<<*peakEta<<std::endl;
   *peakPhi = getPeakBinOf5(phiStripSum, *towerET);
+  //std::cout<<"Peak Phi"<<*peakPhi<<std::endl;
   // Small ECAL_Cluster ET is just the 3x5 around the peak
   *ECAL_ClusterET = 0;
-  for(int dEta = -1; dEta <= 1; dEta++) {
+//subECAL_Cluster 2X5L for eta=0
+ //uint16_t ECAL_ClusterETL ;
+ //ECAL_ClusterETL =0;
+ if (*peakEta==4){
+ 	std::cout<<"Left 2x5"<<std::endl;
+ 	for(int dEtaL = -1; dEtaL <= 0; dEtaL++) {
+#pragma HLS UNROLL
+	  int eta = *peakEta + dEtaL;
+	  
+	    *ECAL_ClusterET += etaStripSum[eta];
+	  
+	}
+ }
+	else if (*peakEta==0){
+		//subECAL_Cluster 2X5R
+	//uint16_t ECAL_ClusterETR ;
+	//ECAL_ClusterETR =0;
+		std::cout<<"Right 2x5"<<std::endl;
+	for(int dEtaR = 0; dEtaR <= 1; dEtaR++) {
+#pragma HLS UNROLL
+	  int eta = *peakEta + dEtaR;
+	  
+	    *ECAL_ClusterET += etaStripSum[eta];
+	  
+	}
+	}
+	else
+	{std::cout<<"3x5"<<std::endl;
+		for(int dEta = -1; dEta <= 1; dEta++) {
 #pragma HLS UNROLL
       int eta = *peakEta + dEta;
         if(eta >= 0 && eta < NCrystalsPerEtaPhi) {
         	 *ECAL_ClusterET += etaStripSum[eta];
       }
   }
-////subECAL_Cluster 2X5L
-//  uint16_t ECAL_ClusterETL ;
-//  ECAL_ClusterETL =0;
-//	for(int dEtaL = -1; dEtaL <= 0; dEtaL++) {
-//#pragma HLS UNROLL
-//	  int eta = *peakEta + dEtaL;
-//	  if(eta >= 0 && eta < NCrystalsPerEtaPhi){
-//	    ECAL_ClusterETL += etaStripSum[eta];
-//	  }
-//	}
-//	//subECAL_Cluster 2X5R
-//	uint16_t ECAL_ClusterETR ;
-//	ECAL_ClusterETR =0;
-//	for(int dEtaR = 0; dEtaR <= 1; dEtaR++) {
-//#pragma HLS UNROLL
-//	  int eta = *peakEta + dEtaR;
-//	  if(eta >= 0 && eta < NCrystalsPerEtaPhi){
-//	    ECAL_ClusterETR += etaStripSum[eta];
-//	  }
-//	}
-//	//ECAL_Cluster2X5 is equal to max of 2X5L or 2X5R
-//	*ECAL_Clusteret2x5 = biggerLR(ECAL_ClusterETL, ECAL_ClusterETR);
-//	
+	}
+	
+	//ECAL_Cluster2X5 is equal to max of 2X5L or 2X5R
+	//*ECAL_Clusteret2x5 = biggerLR(ECAL_ClusterETL, ECAL_ClusterETR);
+	
 	return true;
 }
 
@@ -1780,7 +1793,7 @@ for (int i=0;i<17;i++)
 #pragma HLS UNROLL
 	  for( int cphi =0; cphi<5; cphi++) {
 #pragma HLS UNROLL
-	crystals_tower[tEta][tPhi][ceta][cphi] = crystals[i+tEta][tPhi][ceta][cphi];
+	crystals_tower[tEta][tPhi][ceta][cphi] = uncal_crystals[i+tEta][tPhi][ceta][cphi];
 	  }
 	  
 	}
@@ -1832,7 +1845,7 @@ for (int i=0;i<17;i++)
 #pragma HLS UNROLL
 	for( int cphi =0; cphi<5; cphi++) {
 #pragma HLS UNROLL
-	  crystals_tower[tEta][tPhi][ceta][cphi] = crystals[tEta+15][tPhi][ceta][cphi];
+	  crystals_tower[tEta][tPhi][ceta][cphi] = uncal_crystals[tEta+15][tPhi][ceta][cphi];
 	}
 
       }
@@ -1936,7 +1949,7 @@ for (int i=0;i<17;i++)
       SortedPeak_Eta[i]= peakEta3[i];
       SortedPeak_Phi[i]= peakPhi3[i];
 
-      std::cout<<"i: "<<i<<" SortedPeak_Eta[i] "<<SortedPeak_Eta[i]<<" SortedPeak_Phi[i]"<<SortedPeak_Phi[i]<<"  SortedECAL_Cluster_ET[i]"<< SortedECAL_Cluster_ET[i]<<std::endl;
+      //std::cout<<"i: "<<i<<" SortedPeak_Eta[i] "<<SortedPeak_Eta[i]<<" SortedPeak_Phi[i]"<<SortedPeak_Phi[i]<<"  SortedECAL_Cluster_ET[i]"<< SortedECAL_Cluster_ET[i]<<std::endl;
     }
 
   
