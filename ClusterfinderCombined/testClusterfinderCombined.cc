@@ -75,6 +75,8 @@ ap_fixed<16,9> crystals[17][4][5][5];
   ap_fixed<16,9> largeClusterET[17][4];
   ap_fixed<16,9> smallClusterET[17][4];
   ap_fixed<16,9> sortedCluster_ET[30];
+   uint16_t TowerPeak_Eta[30];
+  uint16_t TowerPeak_Phi[30];
   uint16_t sortedPeak_Eta[30];
   uint16_t sortedPeak_Phi[30];
   ap_fixed<16,9> totalCardET = 0;
@@ -149,7 +151,7 @@ ap_fixed<16,9> crystals[17][4][5][5];
   				 a[6+8][3]=33;
   				 a[7+8][3]=44;
   				 a[16][3]=1;
-  if(getECAL_ClustersInCard(crystals, peakEta, peakPhi, largeClusterET, smallClusterET,sortedCluster_ET,sortedPeak_Eta,a,sortedPeak_Phi)) {
+  if(getECAL_ClustersInCard(crystals, peakEta, peakPhi, largeClusterET, smallClusterET,sortedCluster_ET,sortedPeak_Eta,TowerPeak_Eta, TowerPeak_Phi,a,sortedPeak_Phi)) {
     cout << "From the simulation: " << endl;
     cout << "tEta\ttPhi\tpeakEta\tpeakPhi\tlargeClusterET\tsmallClusterET\t" << endl;
     for(int tEta = 0; tEta < 17; tEta++) {
@@ -172,17 +174,17 @@ ap_fixed<16,9> crystals[17][4][5][5];
     //cout << "Hi dinho"
     return 1;
   }
-  uint16_t cEta[30];
-   uint16_t cPhi[30];
-   HCAL_TowerPeaks(a,cPhi,cEta);
-     cout<<"Eta"
-               << "\t" <<  "Phi" << "\t" <<  "ET" << endl;
-          for(uint16_t i=0;i<30;i++)
-        {
-          cout << cEta[i]
-               << "\t" <<  cPhi[i] <<"\t"<<  a[cEta[i]][cPhi[i]] << endl;
+  // uint16_t cEta[30];
+  //  uint16_t cPhi[30];
+  //  HCAL_TowerPeaks(a,cPhi,cEta);
+  //    cout<<"Eta"
+  //              << "\t" <<  "Phi" << "\t" <<  "ET" << endl;
+  //         for(uint16_t i=0;i<30;i++)
+  //       {
+  //         cout << cEta[i]
+  //              << "\t" <<  cPhi[i] <<"\t"<<  a[cEta[i]][cPhi[i]] << endl;
         
-        }
+  //       }
     
 
 
