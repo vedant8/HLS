@@ -34,12 +34,14 @@ bool getECAL_ClustersInCard(ap_fixed<16,9> crystals[NCaloLayer1Eta][NCaloLayer1P
 		   ap_fixed<16,9> smallECAL_ClusterET[NCaloLayer1Eta][NCaloLayer1Phi],
 		   ap_fixed<16,9>SortedECAL_Cluster_ET[30],
                        uint16_t SortedPeak_Eta[30],
+                       uint16_t TowerPeak_Eta[30],
+                       uint16_t TowerPeak_Phi[30],
                        ap_fixed<16,9> HCAL_towerET_uncal[17][4],
                        uint16_t SortedPeak_Phi[30]);
 
-uint16_t biggerLR(uint16_t ECAL_ClusterETL, uint16_t ECAL_ClusterETR);
+//uint16_t biggerLR(uint16_t ECAL_ClusterETL, uint16_t ECAL_ClusterETR);
 
-void HCAL_TowerPeaks(ap_fixed<16,9> HCAL_towerET[17][4], uint16_t HCAL_TowerPhi[30], uint16_t HCAL_TowerEta[30]);  
+//void HCAL_TowerPeaks(ap_fixed<16,9> HCAL_towerET[17][4], uint16_t HCAL_TowerPhi[30], uint16_t HCAL_TowerEta[30]);  
 
 
 #endif
