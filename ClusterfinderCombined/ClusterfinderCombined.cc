@@ -2087,7 +2087,9 @@ bool getECAL_ClustersInCard(ap_fixed<16,9> uncal_crystals[NCaloLayer1Eta][NCaloL
 #pragma HLS ARRAY_PARTITION variable=SortedECAL_Cluster_ET complete dim=0
 #pragma HLS ARRAY_PARTITION variable=SortedPeak_Eta complete dim=0
 #pragma HLS ARRAY_PARTITION variable=SortedPeak_Phi complete dim=0
-
+#pragma HLS ARRAY_PARTITION variable=TowerPeak_Eta complete dim=0
+#pragma HLS ARRAY_PARTITION variable=TowerPeak_Phi complete dim=0
+#pragma HLS ARRAY_PARTITION variable=HCAL_towerET_uncal complete dim=0
 ap_fixed<16,9> crystals[NCaloLayer1Eta][NCaloLayer1Phi][NCrystalsPerEtaPhi][NCrystalsPerEtaPhi];
 #pragma HLS ARRAY_PARTITION variable=crystals complete dim=0
 for (int i=0;i<17;i++)
@@ -2234,6 +2236,8 @@ for (int i=0;i<17;i++)
 #pragma HLS ARRAY_PARTITION variable=SortedECAL_Cluster_ET1 complete dim=0
 #pragma HLS ARRAY_PARTITION variable=SortedPeak_Eta1 complete dim=0
 #pragma HLS ARRAY_PARTITION variable=SortedPeak_Phi1 complete dim=0
+#pragma HLS ARRAY_PARTITION variable=TowerPeak_Eta1 complete dim=0
+#pragma HLS ARRAY_PARTITION variable=TowerPeak_Phi1 complete dim=0
 
   for(int i=0; i<5; i++)
     {
@@ -2406,6 +2410,8 @@ for (int i=0;i<17;i++)
 
 #pragma HLS ARRAY_PARTITION variable=peakEta3 complete dim=0
 #pragma HLS ARRAY_PARTITION variable=peakPhi3 complete dim=0
+#pragma HLS ARRAY_PARTITION variable=TowerpeakEta3 complete dim=0
+#pragma HLS ARRAY_PARTITION variable=TowerpeakPhi3 complete dim=0
 #pragma HLS ARRAY_PARTITION variable=ECAL_ClusterET3 complete dim=0
   
   for(int i=0;i<32;i++)
