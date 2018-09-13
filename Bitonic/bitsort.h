@@ -1,5 +1,5 @@
 #include<stdio.h>
 #include<math.h>
 #include <stdint.h>
-void bitsort(int b[128]);
+void bitsort(uint16_t b[128]);
 	 
