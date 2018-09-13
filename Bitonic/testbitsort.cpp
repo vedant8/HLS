@@ -2,7 +2,7 @@
 //using namespace std;
 int main ()
 {
-	 int a[128];
+	 uint16_t a[128];
 		 a[0]=16;
 		 a[1]=24;
 		 a[2]=72;
