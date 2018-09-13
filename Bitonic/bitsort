@@ -1,111 +1,2954 @@
 #include "bitsort.h"
+//uuint16_t16_t a[128];// Global array variable used; doesn't waste clock cycles in copying the array between functions
+//hardcoding the blocks of the recursive algorithm necessary to reduce clock cycles.
+void bitonic128(uint16_t a[128])
+{// sorting the entire input array
+uint16_t temp;
+//#pragma HLS dataflow
+for (uint16_t i=0;i<64;i++)
+{
+	#pragma HLS unroll
+	if(a[i]>a[i+64])
+		{
+			temp=a[i+64];
+			a[i+64]=a[i];
+			a[i]=temp;
+		}
+		}
+for(uint16_t i=0;i<32;i++)
+	{
+	#pragma HLS unroll
+	if(a[i]>a[i+32])
+		{
+			temp=a[i+32];
+			a[i+32]=a[i];
+			a[i]=temp;
+		}
+		}
+	 for(uint16_t i=64;i<96;i++)
+	{
+	#pragma HLS unroll
+	if(a[i]>a[i+32])
+		{
+			temp=a[i+32];
+			a[i+32]=a[i];
+			a[i]=temp;
+		}
+		}
+	 for(uint16_t i=0;i<16;i++)
+	 {
+	 #pragma HLS unroll
+	 		if(a[i]>a[i+16])
+	 		{
+	 			temp=a[i+16];
+	 			a[i+16]=a[i];
+	 			a[i]=temp;
+	 		}
+	 	}
 
-int temp;
-//int a[8];
- 
-void bitonic21(int i)
-{
-	if(a[i]>a[i+1])
-{temp=a[i+1];
-a[i+1]=a[i];
-a[i]=temp;
-}
-}
-void bitonic22(int i)
-{
-if(a[i]<a[i+1])
-{temp=a[i+1];
-a[i+1]=a[i];
-a[i]=temp;
-}
-}
-void bitonic41(int i)
-{
+	 	for(uint16_t i=32;i<48;i++)
+	 {
+	 #pragma HLS unroll
+	 	if(a[i]>a[i+16])
+	 	{
+	 		temp=a[i+16];
+	 		a[i+16]=a[i];
+	 		a[i]=temp;
+	 	}
+	 }
+	 for(uint16_t i=64;i<80;i++)
+	 {
+	 #pragma HLS unroll
+	 	if(a[i]>a[i+16])
+	 	{
+	 		temp=a[i+16];
+	 		a[i+16]=a[i];
+	 		a[i]=temp;
+	 	}
+	 }
+	 	for(uint16_t i=96;i<112;i++)
+	 {
+	 #pragma HLS unroll
+	 	if(a[i]>a[i+16])
+	 	{
+	 		temp=a[i+16];
+	 		a[i+16]=a[i];
+	 		a[i]=temp;
+	 	}
+	 }
+	 	for(uint16_t i=0;i<8;i++)
+	 		{
+	 	#pragma HLS unroll
+	 			if(a[i]>a[i+8])
+	 					{
+	 						temp=a[i+8];
+	 						a[i+8]=a[i];
+	 						a[i]=temp;
+	 					}
+	 		}
+	 		for(uint16_t i=16;i<24;i++)
+	 			{
+	 		#pragma HLS unroll
+	 				if(a[i]>a[i+8])
+	 						{
+	 							temp=a[i+8];
+	 							a[i+8]=a[i];
+	 							a[i]=temp;
+	 						}
+	 			}
 
+	 		for(uint16_t i=32;i<40;i++)
+	 		{
+	 	#pragma HLS unroll
+	 			if(a[i]>a[i+8])
+	 					{
+	 						temp=a[i+8];
+	 						a[i+8]=a[i];
+	 						a[i]=temp;
+	 					}
+	 		}
+	 		for(uint16_t i=48;i<56;i++)
+	 			{
+	 		#pragma HLS unroll
+	 				if(a[i]>a[i+8])
+	 						{
+	 							temp=a[i+8];
+	 							a[i+8]=a[i];
+	 							a[i]=temp;
+	 						}
+	 			}
+	 			for(uint16_t i=64;i<72;i++)
+	 		{
+	 	#pragma HLS unroll
+	 			if(a[i]>a[i+8])
+	 					{
+	 						temp=a[i+8];
+	 						a[i+8]=a[i];
+	 						a[i]=temp;
+	 					}
+	 		}
+	 			for(uint16_t i=80;i<88;i++)
+	 				{
+	 			#pragma HLS unroll
+	 					if(a[i]>a[i+8])
+	 							{
+	 								temp=a[i+8];
+	 								a[i+8]=a[i];
+	 								a[i]=temp;
+	 							}
+	 				}
+	 		for(uint16_t i=96;i<104;i++)
+	 		{
+	 	#pragma HLS unroll
+	 			if(a[i]>a[i+8])
+	 					{
+	 						temp=a[i+8];
+	 						a[i+8]=a[i];
+	 						a[i]=temp;
+	 					}
+	 		}
+	 		for(uint16_t i=112;i<120;i++)
+	 			{
+	 		#pragma HLS unroll
+	 				if(a[i]>a[i+8])
+	 						{
+	 							temp=a[i+8];
+	 							a[i+8]=a[i];
+	 							a[i]=temp;
+	 						}
+	 			}
+	 		for(uint16_t i=0;i<4;i++)
+	 			{
+	 			#pragma HLS unroll
+	 			if(a[i]>a[i+4])
+	 				{
+	 					temp=a[i+4];
+	 					a[i+4]=a[i];
+	 					a[i]=temp;
+	 				}
+	 				}
+	 		 for(uint16_t i=8;i<12;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 		 for(uint16_t i=16;i<20;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 		 for(uint16_t i=24;i<28;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+
+	 					for(uint16_t i=32;i<36;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 		for(uint16_t i=40;i<44;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 		for(uint16_t i=48;i<52;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 		for(uint16_t i=56;i<60;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 				for(uint16_t i=64;i<68;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 				for(uint16_t i=72;i<76;i++)
+	 							{
+	 							#pragma HLS unroll
+	 							if(a[i]>a[i+4])
+	 								{
+	 									temp=a[i+4];
+	 									a[i+4]=a[i];
+	 									a[i]=temp;
+	 								}
+	 								}
+	 				for(uint16_t i=80;i<84;i++)
+	 							{
+	 							#pragma HLS unroll
+	 							if(a[i]>a[i+4])
+	 								{
+	 									temp=a[i+4];
+	 									a[i+4]=a[i];
+	 									a[i]=temp;
+	 								}
+	 								}
+	 				for(uint16_t i=88;i<92;i++)
+	 							{
+	 							#pragma HLS unroll
+	 							if(a[i]>a[i+4])
+	 								{
+	 									temp=a[i+4];
+	 									a[i+4]=a[i];
+	 									a[i]=temp;
+	 								}
+	 								}
+	 				for(uint16_t i=96;i<100;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 				for(uint16_t i=104;i<108;i++)
+	 							{
+	 							#pragma HLS unroll
+	 							if(a[i]>a[i+4])
+	 								{
+	 									temp=a[i+4];
+	 									a[i+4]=a[i];
+	 									a[i]=temp;
+	 								}
+	 								}
+	 				for(uint16_t i=112;i<116;i++)
+	 							{
+	 							#pragma HLS unroll
+	 							if(a[i]>a[i+4])
+	 								{
+	 									temp=a[i+4];
+	 									a[i+4]=a[i];
+	 									a[i]=temp;
+	 								}
+	 								}
+	 				for(uint16_t i=120;i<124;i++)
+	 							{
+	 							#pragma HLS unroll
+	 							if(a[i]>a[i+4])
+	 								{
+	 									temp=a[i+4];
+	 									a[i+4]=a[i];
+	 									a[i]=temp;
+	 								}
+	 								}
+for(uint16_t i=0;i<29;i=i+4)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+2])
+				{
+					temp=a[i+2];
+					a[i+2]=a[i];
+					a[i]=temp;
+				}
+				if(a[i+1]>a[i+3])
+				{
+					temp=a[i+3];
+					a[i+3]=a[i+1];
+					a[i+1]=temp;
+				}
+				}
+
+	for(uint16_t i=32;i<61;i=i+4)
+		{
+		#pragma HLS unroll
+		if(a[i]>a[i+2])
+			{
+				temp=a[i+2];
+				a[i+2]=a[i];
+				a[i]=temp;
+			}
+			if(a[i+1]>a[i+3])
+			{
+				temp=a[i+3];
+				a[i+3]=a[i+1];
+				a[i+1]=temp;
+			}
+			}
+		for(uint16_t i=64;i<93;i=i+4)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+2])
+				{
+					temp=a[i+2];
+					a[i+2]=a[i];
+					a[i]=temp;
+				}
+				if(a[i+1]>a[i+3])
+				{
+					temp=a[i+3];
+					a[i+3]=a[i+1];
+					a[i+1]=temp;
+				}
+				}
+			for(uint16_t i=96;i<125;i=i+4)
+				{
+				#pragma HLS unroll
+				if(a[i]>a[i+2])
+					{
+						temp=a[i+2];
+						a[i+2]=a[i];
+						a[i]=temp;
+					}
+					if(a[i+1]>a[i+3])
+					{
+						temp=a[i+3];
+						a[i+3]=a[i+1];
+						a[i+1]=temp;
+					}
+					}
+
+
+
+		 for(uint16_t i=0;i<31;i=i+2)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+			}
+		for(uint16_t i=32;i<63;i=i+2)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+			}
+		for(uint16_t i=64;i<95;i=i+2)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+			}
+		for(uint16_t i=96;i<127;i=i+2)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+			}
+
+}
+void bitonic64(uint16_t a[128])
+{// sorting blocks of size 64
+	uint16_t temp;
+	//#pragma HLS dataflow
+
+	 for(uint16_t i=0;i<32;i++)
+	{
+	#pragma HLS unroll
+	if(a[i]>a[i+32])
+		{
+			temp=a[i+32];
+			a[i+32]=a[i];
+			a[i]=temp;
+		}
+		}
+	 for(uint16_t i=64;i<96;i++)
+	{
+	#pragma HLS unroll
+	if(a[i]<a[i+32])
+		{
+			temp=a[i+32];
+			a[i+32]=a[i];
+			a[i]=temp;
+		}
+		}
+	 for(uint16_t i=0;i<16;i++)
+	 {
+	 #pragma HLS unroll
+	 		if(a[i]>a[i+16])
+	 		{
+	 			temp=a[i+16];
+	 			a[i+16]=a[i];
+	 			a[i]=temp;
+	 		}
+	 	}
+
+	 	for(uint16_t i=32;i<48;i++)
+	 {
+	 #pragma HLS unroll
+	 	if(a[i]>a[i+16])
+	 	{
+	 		temp=a[i+16];
+	 		a[i+16]=a[i];
+	 		a[i]=temp;
+	 	}
+	 }
+	 for(uint16_t i=64;i<80;i++)
+	 {
+	 #pragma HLS unroll
+	 	if(a[i]<a[i+16])
+	 	{
+	 		temp=a[i+16];
+	 		a[i+16]=a[i];
+	 		a[i]=temp;
+	 	}
+	 }
+	 	for(uint16_t i=96;i<112;i++)
+	 {
+	 #pragma HLS unroll
+	 	if(a[i]<a[i+16])
+	 	{
+	 		temp=a[i+16];
+	 		a[i+16]=a[i];
+	 		a[i]=temp;
+	 	}
+	 }
+	 	for(uint16_t i=0;i<8;i++)
+	 		{
+	 	#pragma HLS unroll
+	 			if(a[i]>a[i+8])
+	 					{
+	 						temp=a[i+8];
+	 						a[i+8]=a[i];
+	 						a[i]=temp;
+	 					}
+	 		}
+	 		for(uint16_t i=16;i<24;i++)
+	 			{
+	 		#pragma HLS unroll
+	 				if(a[i]>a[i+8])
+	 						{
+	 							temp=a[i+8];
+	 							a[i+8]=a[i];
+	 							a[i]=temp;
+	 						}
+	 			}
+
+	 		for(uint16_t i=32;i<40;i++)
+	 		{
+	 	#pragma HLS unroll
+	 			if(a[i]>a[i+8])
+	 					{
+	 						temp=a[i+8];
+	 						a[i+8]=a[i];
+	 						a[i]=temp;
+	 					}
+	 		}
+	 		for(uint16_t i=48;i<56;i++)
+	 			{
+	 		#pragma HLS unroll
+	 				if(a[i]>a[i+8])
+	 						{
+	 							temp=a[i+8];
+	 							a[i+8]=a[i];
+	 							a[i]=temp;
+	 						}
+	 			}
+	 			for(uint16_t i=64;i<72;i++)
+	 		{
+	 	#pragma HLS unroll
+	 			if(a[i]<a[i+8])
+	 					{
+	 						temp=a[i+8];
+	 						a[i+8]=a[i];
+	 						a[i]=temp;
+	 					}
+	 		}
+	 			for(uint16_t i=80;i<88;i++)
+	 				{
+	 			#pragma HLS unroll
+	 					if(a[i]<a[i+8])
+	 							{
+	 								temp=a[i+8];
+	 								a[i+8]=a[i];
+	 								a[i]=temp;
+	 							}
+	 				}
+	 		for(uint16_t i=96;i<104;i++)
+	 		{
+	 	#pragma HLS unroll
+	 			if(a[i]<a[i+8])
+	 					{
+	 						temp=a[i+8];
+	 						a[i+8]=a[i];
+	 						a[i]=temp;
+	 					}
+	 		}
+	 		for(uint16_t i=112;i<120;i++)
+	 			{
+	 		#pragma HLS unroll
+	 				if(a[i]<a[i+8])
+	 						{
+	 							temp=a[i+8];
+	 							a[i+8]=a[i];
+	 							a[i]=temp;
+	 						}
+	 			}
+	 		for(uint16_t i=0;i<4;i++)
+	 			{
+	 			#pragma HLS unroll
+	 			if(a[i]>a[i+4])
+	 				{
+	 					temp=a[i+4];
+	 					a[i+4]=a[i];
+	 					a[i]=temp;
+	 				}
+	 				}
+	 		 for(uint16_t i=8;i<12;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 		 for(uint16_t i=16;i<20;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 		 for(uint16_t i=24;i<28;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+
+	 					for(uint16_t i=32;i<36;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 		for(uint16_t i=40;i<44;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 		for(uint16_t i=48;i<52;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 		for(uint16_t i=56;i<60;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]>a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 				for(uint16_t i=64;i<68;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]<a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 				for(uint16_t i=72;i<76;i++)
+	 							{
+	 							#pragma HLS unroll
+	 							if(a[i]<a[i+4])
+	 								{
+	 									temp=a[i+4];
+	 									a[i+4]=a[i];
+	 									a[i]=temp;
+	 								}
+	 								}
+	 				for(uint16_t i=80;i<84;i++)
+	 							{
+	 							#pragma HLS unroll
+	 							if(a[i]<a[i+4])
+	 								{
+	 									temp=a[i+4];
+	 									a[i+4]=a[i];
+	 									a[i]=temp;
+	 								}
+	 								}
+	 				for(uint16_t i=88;i<92;i++)
+	 							{
+	 							#pragma HLS unroll
+	 							if(a[i]<a[i+4])
+	 								{
+	 									temp=a[i+4];
+	 									a[i+4]=a[i];
+	 									a[i]=temp;
+	 								}
+	 								}
+	 				for(uint16_t i=96;i<100;i++)
+	 					{
+	 					#pragma HLS unroll
+	 					if(a[i]<a[i+4])
+	 						{
+	 							temp=a[i+4];
+	 							a[i+4]=a[i];
+	 							a[i]=temp;
+	 						}
+	 						}
+	 				for(uint16_t i=104;i<108;i++)
+	 							{
+	 							#pragma HLS unroll
+	 							if(a[i]<a[i+4])
+	 								{
+	 									temp=a[i+4];
+	 									a[i+4]=a[i];
+	 									a[i]=temp;
+	 								}
+	 								}
+	 				for(uint16_t i=112;i<116;i++)
+	 							{
+	 							#pragma HLS unroll
+	 							if(a[i]<a[i+4])
+	 								{
+	 									temp=a[i+4];
+	 									a[i+4]=a[i];
+	 									a[i]=temp;
+	 								}
+	 								}
+	 				for(uint16_t i=120;i<124;i++)
+	 							{
+	 							#pragma HLS unroll
+	 							if(a[i]<a[i+4])
+	 								{
+	 									temp=a[i+4];
+	 									a[i+4]=a[i];
+	 									a[i]=temp;
+	 								}
+	 								}
+ for(uint16_t i=0;i<29;i=i+4)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+2])
+				{
+					temp=a[i+2];
+					a[i+2]=a[i];
+					a[i]=temp;
+				}
+				if(a[i+1]>a[i+3])
+				{
+					temp=a[i+3];
+					a[i+3]=a[i+1];
+					a[i+1]=temp;
+				}
+				}
+
+	for(uint16_t i=32;i<61;i=i+4)
+		{
+		#pragma HLS unroll
+		if(a[i]>a[i+2])
+			{
+				temp=a[i+2];
+				a[i+2]=a[i];
+				a[i]=temp;
+			}
+			if(a[i+1]>a[i+3])
+			{
+				temp=a[i+3];
+				a[i+3]=a[i+1];
+				a[i+1]=temp;
+			}
+			}
+		for(uint16_t i=64;i<93;i=i+4)
+			{
+			#pragma HLS unroll
+			if(a[i]<a[i+2])
+				{
+					temp=a[i+2];
+					a[i+2]=a[i];
+					a[i]=temp;
+				}
+				if(a[i+1]<a[i+3])
+				{
+					temp=a[i+3];
+					a[i+3]=a[i+1];
+					a[i+1]=temp;
+				}
+				}
+			for(uint16_t i=96;i<125;i=i+4)
+				{
+				#pragma HLS unroll
+				if(a[i]<a[i+2])
+					{
+						temp=a[i+2];
+						a[i+2]=a[i];
+						a[i]=temp;
+					}
+					if(a[i+1]<a[i+3])
+					{
+						temp=a[i+3];
+						a[i+3]=a[i+1];
+						a[i+1]=temp;
+					}
+					}
+
+
+
+		 for(uint16_t i=0;i<31;i=i+2)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+			}
+		for(uint16_t i=32;i<63;i=i+2)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+			}
+		for(uint16_t i=64;i<95;i=i+2)
+			{
+			#pragma HLS unroll
+			if(a[i]<a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+			}
+		for(uint16_t i=96;i<127;i=i+2)
+			{
+			#pragma HLS unroll
+			if(a[i]<a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+			}
+		bitonic128(a);
+}
+
+void bitonic32(uint16_t a[128])
+{// sorting blocks of size 32
+	uint16_t temp;
+//#pragma HLS dataflow
+for(uint16_t i=0;i<16;i++)
+{
+#pragma HLS unroll
+		if(a[i]>a[i+16])
+		{
+			temp=a[i+16];
+			a[i+16]=a[i];
+			a[i]=temp;
+		}
+	}
+
+	for(uint16_t i=32;i<48;i++)
+{
+#pragma HLS unroll
+	if(a[i]<a[i+16])
+	{
+		temp=a[i+16];
+		a[i+16]=a[i];
+		a[i]=temp;
+	}
+}
+for(uint16_t i=64;i<80;i++)
+{
+#pragma HLS unroll
+	if(a[i]>a[i+16])
+	{
+		temp=a[i+16];
+		a[i+16]=a[i];
+		a[i]=temp;
+	}
+}
+	for(uint16_t i=96;i<112;i++)
+{
+#pragma HLS unroll
+	if(a[i]<a[i+16])
+	{
+		temp=a[i+16];
+		a[i+16]=a[i];
+		a[i]=temp;
+	}
+}
+
+
+	for(uint16_t i=0;i<8;i++)
+	{
+#pragma HLS unroll
+		if(a[i]>a[i+8])
+				{
+					temp=a[i+8];
+					a[i+8]=a[i];
+					a[i]=temp;
+				}
+	}
+	for(uint16_t i=16;i<24;i++)
+		{
+	#pragma HLS unroll
+			if(a[i]>a[i+8])
+					{
+						temp=a[i+8];
+						a[i+8]=a[i];
+						a[i]=temp;
+					}
+		}
+
+	for(uint16_t i=32;i<40;i++)
+	{
+#pragma HLS unroll
+		if(a[i]<a[i+8])
+				{
+					temp=a[i+8];
+					a[i+8]=a[i];
+					a[i]=temp;
+				}
+	}
+	for(uint16_t i=48;i<56;i++)
+		{
+	#pragma HLS unroll
+			if(a[i]<a[i+8])
+					{
+						temp=a[i+8];
+						a[i+8]=a[i];
+						a[i]=temp;
+					}
+		}
+		for(uint16_t i=64;i<72;i++)
+	{
+#pragma HLS unroll
+		if(a[i]>a[i+8])
+				{
+					temp=a[i+8];
+					a[i+8]=a[i];
+					a[i]=temp;
+				}
+	}
+		for(uint16_t i=80;i<88;i++)
+			{
+		#pragma HLS unroll
+				if(a[i]>a[i+8])
+						{
+							temp=a[i+8];
+							a[i+8]=a[i];
+							a[i]=temp;
+						}
+			}
+	for(uint16_t i=96;i<104;i++)
+	{
+#pragma HLS unroll
+		if(a[i]<a[i+8])
+				{
+					temp=a[i+8];
+					a[i+8]=a[i];
+					a[i]=temp;
+				}
+	}
+	for(uint16_t i=112;i<120;i++)
+		{
+	#pragma HLS unroll
+			if(a[i]<a[i+8])
+					{
+						temp=a[i+8];
+						a[i+8]=a[i];
+						a[i]=temp;
+					}
+		}
+
+ for(uint16_t i=0;i<4;i++)
+	{
+	#pragma HLS unroll
+	if(a[i]>a[i+4])
+		{
+			temp=a[i+4];
+			a[i+4]=a[i];
+			a[i]=temp;
+		}
+		}
+ for(uint16_t i=8;i<12;i++)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+4])
+				{
+					temp=a[i+4];
+					a[i+4]=a[i];
+					a[i]=temp;
+				}
+				}
+ for(uint16_t i=16;i<20;i++)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+4])
+				{
+					temp=a[i+4];
+					a[i+4]=a[i];
+					a[i]=temp;
+				}
+				}
+ for(uint16_t i=24;i<28;i++)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+4])
+				{
+					temp=a[i+4];
+					a[i+4]=a[i];
+					a[i]=temp;
+				}
+				}
+
+			for(uint16_t i=32;i<36;i++)
+			{
+			#pragma HLS unroll
+			if(a[i]<a[i+4])
+				{
+					temp=a[i+4];
+					a[i+4]=a[i];
+					a[i]=temp;
+				}
+				}
+for(uint16_t i=40;i<44;i++)
+			{
+			#pragma HLS unroll
+			if(a[i]<a[i+4])
+				{
+					temp=a[i+4];
+					a[i+4]=a[i];
+					a[i]=temp;
+				}
+				}
+for(uint16_t i=48;i<52;i++)
+			{
+			#pragma HLS unroll
+			if(a[i]<a[i+4])
+				{
+					temp=a[i+4];
+					a[i+4]=a[i];
+					a[i]=temp;
+				}
+				}
+for(uint16_t i=56;i<60;i++)
+			{
+			#pragma HLS unroll
+			if(a[i]<a[i+4])
+				{
+					temp=a[i+4];
+					a[i+4]=a[i];
+					a[i]=temp;
+				}
+				}
+		for(uint16_t i=64;i<68;i++)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+4])
+				{
+					temp=a[i+4];
+					a[i+4]=a[i];
+					a[i]=temp;
+				}
+				}
+		for(uint16_t i=72;i<76;i++)
+					{
+					#pragma HLS unroll
+					if(a[i]>a[i+4])
+						{
+							temp=a[i+4];
+							a[i+4]=a[i];
+							a[i]=temp;
+						}
+						}
+		for(uint16_t i=80;i<84;i++)
+					{
+					#pragma HLS unroll
+					if(a[i]>a[i+4])
+						{
+							temp=a[i+4];
+							a[i+4]=a[i];
+							a[i]=temp;
+						}
+						}
+		for(uint16_t i=88;i<92;i++)
+					{
+					#pragma HLS unroll
+					if(a[i]>a[i+4])
+						{
+							temp=a[i+4];
+							a[i+4]=a[i];
+							a[i]=temp;
+						}
+						}
+		for(uint16_t i=96;i<100;i++)
+			{
+			#pragma HLS unroll
+			if(a[i]<a[i+4])
+				{
+					temp=a[i+4];
+					a[i+4]=a[i];
+					a[i]=temp;
+				}
+				}
+		for(uint16_t i=104;i<108;i++)
+					{
+					#pragma HLS unroll
+					if(a[i]<a[i+4])
+						{
+							temp=a[i+4];
+							a[i+4]=a[i];
+							a[i]=temp;
+						}
+						}
+		for(uint16_t i=112;i<116;i++)
+					{
+					#pragma HLS unroll
+					if(a[i]<a[i+4])
+						{
+							temp=a[i+4];
+							a[i+4]=a[i];
+							a[i]=temp;
+						}
+						}
+		for(uint16_t i=120;i<124;i++)
+					{
+					#pragma HLS unroll
+					if(a[i]<a[i+4])
+						{
+							temp=a[i+4];
+							a[i+4]=a[i];
+							a[i]=temp;
+						}
+						}
+
+		 for(uint16_t i=0;i<29;i=i+4)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+2])
+				{
+					temp=a[i+2];
+					a[i+2]=a[i];
+					a[i]=temp;
+				}
+				if(a[i+1]>a[i+3])
+				{
+					temp=a[i+3];
+					a[i+3]=a[i+1];
+					a[i+1]=temp;
+				}
+				}
+
+		for(uint16_t i=32;i<61;i=i+4)
+			{
+			#pragma HLS unroll
+			if(a[i]<a[i+2])
+				{
+					temp=a[i+2];
+					a[i+2]=a[i];
+					a[i]=temp;
+				}
+				if(a[i+1]<a[i+3])
+				{
+					temp=a[i+3];
+					a[i+3]=a[i+1];
+					a[i+1]=temp;
+				}
+				}
+		for(uint16_t i=64;i<93;i=i+4)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+2])
+				{
+					temp=a[i+2];
+					a[i+2]=a[i];
+					a[i]=temp;
+				}
+				if(a[i+1]>a[i+3])
+				{
+					temp=a[i+3];
+					a[i+3]=a[i+1];
+					a[i+1]=temp;
+				}
+				}
+		for(uint16_t i=96;i<125;i=i+4)
+			{
+			#pragma HLS unroll
+			if(a[i]<a[i+2])
+				{
+					temp=a[i+2];
+					a[i+2]=a[i];
+					a[i]=temp;
+				}
+				if(a[i+1]<a[i+3])
+				{
+					temp=a[i+3];
+					a[i+3]=a[i+1];
+					a[i+1]=temp;
+				}
+				}
+
+
+
+		 for(uint16_t i=0;i<31;i=i+2)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+			}
+		for(uint16_t i=32;i<63;i=i+2)
+			{
+			#pragma HLS unroll
+			if(a[i]<a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+			}
+		for(uint16_t i=64;i<95;i=i+2)
+			{
+			#pragma HLS unroll
+			if(a[i]>a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+			}
+		for(uint16_t i=96;i<127;i=i+2)
+			{
+			#pragma HLS unroll
+			if(a[i]<a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+			}
+bitonic64(a);
+}
+void bitonic16(uint16_t a[128])
+{// sorting blocks of size 16
+	uint16_t temp;
+//#pragma HLS dataflow
+	for(uint16_t i=0;i<8;i++)
+	{
+	#pragma HLS unroll
+	if(a[i]>a[i+8])
+		{
+			temp=a[i+8];
+			a[i+8]=a[i];
+			a[i]=temp;
+		}
+
+		}
+
+	for(uint16_t i=16;i<24;i++)
+	{
+	#pragma HLS unroll
+	if(a[i]<a[i+8])
+		{
+			temp=a[i+8];
+			a[i+8]=a[i];
+			a[i]=temp;
+		}
+
+		}
+	for(uint16_t i=32;i<40;i++)
+		{
+		#pragma HLS unroll
+		if(a[i]>a[i+8])
+			{
+				temp=a[i+8];
+				a[i+8]=a[i];
+				a[i]=temp;
+			}
+
+			}
+
+		for(uint16_t i=48;i<56;i++)
+		{
+		#pragma HLS unroll
+		if(a[i]<a[i+8])
+			{
+				temp=a[i+8];
+				a[i+8]=a[i];
+				a[i]=temp;
+			}
+
+			}
+			for(uint16_t i=64;i<72;i++)
+		{
+		#pragma HLS unroll
+		if(a[i]>a[i+8])
+			{
+				temp=a[i+8];
+				a[i+8]=a[i];
+				a[i]=temp;
+			}
+
+			}
+
+		for(uint16_t i=80;i<88;i++)
+		{
+		#pragma HLS unroll
+		if(a[i]<a[i+8])
+			{
+				temp=a[i+8];
+				a[i+8]=a[i];
+				a[i]=temp;
+			}
+
+			}
+
+	for(uint16_t i=96;i<104;i++)
+		{
+		#pragma HLS unroll
+		if(a[i]>a[i+8])
+			{
+				temp=a[i+8];
+				a[i+8]=a[i];
+				a[i]=temp;
+			}
+
+			}
+
+		for(uint16_t i=112;i<120;i++)
+		{
+		#pragma HLS unroll
+		if(a[i]<a[i+8])
+			{
+				temp=a[i+8];
+				a[i+8]=a[i];
+				a[i]=temp;
+			}
+
+			}
+
+	 for(uint16_t i=0;i<4;i++)
+	{
+	#pragma HLS unroll
+	if(a[i]>a[i+4])
+		{
+			temp=a[i+4];
+			a[i+4]=a[i];
+			a[i]=temp;
+		}
+		}
+	 for(uint16_t i=8;i<12;i++)
+	{
+	#pragma HLS unroll
+	if(a[i]>a[i+4])
+		{
+			temp=a[i+4];
+			a[i+4]=a[i];
+			a[i]=temp;
+		}
+		}
+	 for(uint16_t i=16;i<20;i++)
+	{
+	#pragma HLS unroll
+	if(a[i]<a[i+4])
+		{
+			temp=a[i+4];
+			a[i+4]=a[i];
+			a[i]=temp;
+		}
+		}
+	for(uint16_t i=24;i<28;i++)
+	{
+	#pragma HLS unroll
+	if(a[i]<a[i+4])
+		{
+			temp=a[i+4];
+			a[i+4]=a[i];
+			a[i]=temp;
+		}
+		}
+	for(uint16_t i=32;i<36;i++)
+		{
+		#pragma HLS unroll
+		if(a[i]>a[i+4])
+			{
+				temp=a[i+4];
+				a[i+4]=a[i];
+				a[i]=temp;
+			}
+			}
+		 for(uint16_t i=40;i<44;i++)
+		{
+		#pragma HLS unroll
+		if(a[i]>a[i+4])
+			{
+				temp=a[i+4];
+				a[i+4]=a[i];
+				a[i]=temp;
+			}
+			}
+		 for(uint16_t i=48;i<52;i++)
+		{
+		#pragma HLS unroll
+		if(a[i]<a[i+4])
+			{
+				temp=a[i+4];
+				a[i+4]=a[i];
+				a[i]=temp;
+			}
+			}
+		for(uint16_t i=56;i<60;i++)
+		{
+		#pragma HLS unroll
+		if(a[i]<a[i+4])
+			{
+				temp=a[i+4];
+				a[i+4]=a[i];
+				a[i]=temp;
+			}
+			}
+			for(uint16_t i=64;i<68;i++)
+		{
+		#pragma HLS unroll
+		if(a[i]>a[i+4])
+			{
+				temp=a[i+4];
+				a[i+4]=a[i];
+				a[i]=temp;
+			}
+			}
+		 for(uint16_t i=72;i<76;i++)
+		{
+		#pragma HLS unroll
+		if(a[i]>a[i+4])
+			{
+				temp=a[i+4];
+				a[i+4]=a[i];
+				a[i]=temp;
+			}
+			}
+		 for(uint16_t i=80;i<84;i++)
+		{
+		#pragma HLS unroll
+		if(a[i]<a[i+4])
+			{
+				temp=a[i+4];
+				a[i+4]=a[i];
+				a[i]=temp;
+			}
+			}
+		for(uint16_t i=88;i<92;i++)
+		{
+		#pragma HLS unroll
+		if(a[i]<a[i+4])
+			{
+				temp=a[i+4];
+				a[i+4]=a[i];
+				a[i]=temp;
+			}
+			}
+			for(uint16_t i=96;i<100;i++)
+		{
+		#pragma HLS unroll
+		if(a[i]>a[i+4])
+			{
+				temp=a[i+4];
+				a[i+4]=a[i];
+				a[i]=temp;
+			}
+			}
+		 for(uint16_t i=104;i<108;i++)
+		{
+		#pragma HLS unroll
+		if(a[i]>a[i+4])
+			{
+				temp=a[i+4];
+				a[i+4]=a[i];
+				a[i]=temp;
+			}
+			}
+		 for(uint16_t i=112;i<116;i++)
+		{
+		#pragma HLS unroll
+		if(a[i]<a[i+4])
+			{
+				temp=a[i+4];
+				a[i+4]=a[i];
+				a[i]=temp;
+			}
+			}
+		for(uint16_t i=120;i<124;i++)
+		{
+		#pragma HLS unroll
+		if(a[i]<a[i+4])
+			{
+				temp=a[i+4];
+				a[i+4]=a[i];
+				a[i]=temp;
+			}
+			}
+	for(uint16_t i=0;i<13;i=i+4)
+	{
+	#pragma HLS unroll
 	if(a[i]>a[i+2])
 		{
 			temp=a[i+2];
 			a[i+2]=a[i];
 			a[i]=temp;
 		}
-	if(a[i+1]>a[i+3])
-			{
-				temp=a[i+1];
-				a[i+1]=a[i+3];
-				a[i+3]=temp;
-			}
 
-		bitonic21(i);
-		bitonic21(i+2);
-
-}
-void bitonic42(int i)
-{
+		if(a[i+1]>a[i+3])
+		{
+			temp=a[i+3];
+			a[i+3]=a[i+1];
+			a[i+1]=temp;
+		}
+		}
+	for(uint16_t i=16;i<29;i=i+4)
+	{
+	#pragma HLS unroll
 	if(a[i]<a[i+2])
 		{
 			temp=a[i+2];
 			a[i+2]=a[i];
 			a[i]=temp;
 		}
-	if(a[i+1]<a[i+3])
+
+		if(a[i+1]<a[i+3])
+		{
+			temp=a[i+3];
+			a[i+3]=a[i+1];
+			a[i+1]=temp;
+		}
+		}
+	for(uint16_t i=32;i<45;i=i+4)
+	{
+	#pragma HLS unroll//may be faster if split uint16_to two loops
+	if(a[i]>a[i+2])
+		{
+			temp=a[i+2];
+			a[i+2]=a[i];
+			a[i]=temp;
+		}
+
+		if(a[i+1]>a[i+3])
+		{
+			temp=a[i+3];
+			a[i+3]=a[i+1];
+			a[i+1]=temp;
+		}
+		}
+	for(uint16_t i=48;i<63;i=i+4)
+	{
+	#pragma HLS unroll//may be faster if split uint16_to two loops
+	if(a[i]<a[i+2])
+		{
+			temp=a[i+2];
+			a[i+2]=a[i];
+			a[i]=temp;
+		}
+		if(a[i+1]<a[i+3])
+		{
+			temp=a[i+3];
+			a[i+3]=a[i+1];
+			a[i+1]=temp;
+		}
+		}
+		for(uint16_t i=64;i<77;i=i+4)
+	{
+	#pragma HLS unroll//may be faster if split uint16_to two loops
+	if(a[i]>a[i+2])
+		{
+			temp=a[i+2];
+			a[i+2]=a[i];
+			a[i]=temp;
+		}
+
+		if(a[i+1]>a[i+3])
+		{
+			temp=a[i+3];
+			a[i+3]=a[i+1];
+			a[i+1]=temp;
+		}
+		}
+	for(uint16_t i=80;i<93;i=i+4)
+	{
+	#pragma HLS unroll//may be faster if split uint16_to two loops
+	if(a[i]<a[i+2])
+		{
+			temp=a[i+2];
+			a[i+2]=a[i];
+			a[i]=temp;
+		}
+		if(a[i+1]<a[i+3])
+		{
+			temp=a[i+3];
+			a[i+3]=a[i+1];
+			a[i+1]=temp;
+		}
+		}
+		for(uint16_t i=96;i<109;i=i+4)
+	{
+	#pragma HLS unroll//may be faster if split uint16_to two loops
+	if(a[i]>a[i+2])
+		{
+			temp=a[i+2];
+			a[i+2]=a[i];
+			a[i]=temp;
+		}
+
+		if(a[i+1]>a[i+3])
+		{
+			temp=a[i+3];
+			a[i+3]=a[i+1];
+			a[i+1]=temp;
+		}
+		}
+	for(uint16_t i=112;i<125;i=i+4)
+	{
+	#pragma HLS unroll//may be faster if split uint16_to two loops
+	if(a[i]<a[i+2])
+		{
+			temp=a[i+2];
+			a[i+2]=a[i];
+			a[i]=temp;
+		}
+		if(a[i+1]<a[i+3])
+		{
+			temp=a[i+3];
+			a[i+3]=a[i+1];
+			a[i+1]=temp;
+		}
+		}
+
+	for(uint16_t i=0;i<15;i=i+2)
+	{
+	#pragma HLS unroll//may be faster if split uint16_to two loops
+	if(a[i]>a[i+1])
+		{
+			temp=a[i+1];
+			a[i+1]=a[i];
+			a[i]=temp;
+		}
+
+		}
+	for(uint16_t i=16;i<31;i=i+2)
+	{
+	#pragma HLS unroll//may be faster if split uint16_to two loops
+	if(a[i]<a[i+1])
+		{
+			temp=a[i+1];
+			a[i+1]=a[i];
+			a[i]=temp;
+		}
+
+		}
+	for(uint16_t i=32;i<47;i=i+2)
+		{
+		#pragma HLS unroll//may be faster if split uint16_to two loops
+		if(a[i]>a[i+1])
 			{
 				temp=a[i+1];
-				a[i+1]=a[i+3];
-				a[i+3]=temp;
+				a[i+1]=a[i];
+				a[i]=temp;
 			}
 
-		bitonic22(i);
-		bitonic22(i+2);
-
-}
-void bitonic8()
-{
-
-
-	if(a[0]<a[4])
+			}
+		for(uint16_t i=48;i<63;i=i+2)
 		{
-			temp=a[4];
-			a[4]=a[0];
-			a[0]=temp;
+		#pragma HLS unroll//may be faster if split uint16_to two loops
+		if(a[i]<a[i+1])
+			{
+				temp=a[i+1];
+				a[i+1]=a[i];
+				a[i]=temp;
+			}
+
+			}
+			for(uint16_t i=64;i<79;i=i+2)
+		{
+		#pragma HLS unroll//may be faster if split uint16_to two loops
+		if(a[i]>a[i+1])
+			{
+				temp=a[i+1];
+				a[i+1]=a[i];
+				a[i]=temp;
+			}
+
+			}
+		for(uint16_t i=80;i<95;i=i+2)
+		{
+		#pragma HLS unroll//may be faster if split uint16_to two loops
+		if(a[i]<a[i+1])
+			{
+				temp=a[i+1];
+				a[i+1]=a[i];
+				a[i]=temp;
+			}
+
+			}
+			for(uint16_t i=96;i<111;i=i+2)
+		{
+		#pragma HLS unroll//may be faster if split uint16_to two loops
+		if(a[i]>a[i+1])
+			{
+				temp=a[i+1];
+				a[i+1]=a[i];
+				a[i]=temp;
+			}
+
+			}
+		for(uint16_t i=112;i<127;i=i+2)
+		{
+		#pragma HLS unroll//may be faster if split uint16_to two loops
+		if(a[i]<a[i+1])
+			{
+				temp=a[i+1];
+				a[i+1]=a[i];
+				a[i]=temp;
+			}
+
+			}
+
+bitonic32(a);
+	}
+
+void bitonic8(uint16_t a[128])
+{// sorting blocks of size 8
+	uint16_t temp;
+//#pragma HLS dataflow
+	for(uint16_t i=0;i<4;i++)
+	{
+		#pragma HLS unroll
+		if(a[i]>a[i+4])
+			{
+				temp=a[i+4];
+				a[i+4]=a[i];
+				a[i]=temp;
+			}
+	}
+	for(uint16_t i=8;i<12;i++)
+	{
+		#pragma HLS unroll
+		if(a[i]<a[i+4])
+			{
+				temp=a[i+4];
+				a[i+4]=a[i];
+				a[i]=temp;
+			}
+	}
+	for(uint16_t i=16;i<20;i++)
+	{
+		#pragma HLS unroll
+		if(a[i]>a[i+4])
+			{
+				temp=a[i+4];
+				a[i+4]=a[i];
+				a[i]=temp;
+			}
+	}
+	for(uint16_t i=24;i<28;i++)
+	{
+		#pragma HLS unroll
+		if(a[i]<a[i+4])
+			{
+				temp=a[i+4];
+				a[i+4]=a[i];
+				a[i]=temp;
+			}
+	}
+	for(uint16_t i=32;i<36;i++)
+		{
+			#pragma HLS unroll
+			if(a[i]>a[i+4])
+				{
+					temp=a[i+4];
+					a[i+4]=a[i];
+					a[i]=temp;
+				}
 		}
-	if(a[1]<a[5])
+		for(uint16_t i=40;i<44;i++)
+		{
+			#pragma HLS unroll
+			if(a[i]<a[i+4])
+				{
+					temp=a[i+4];
+					a[i+4]=a[i];
+					a[i]=temp;
+				}
+		}
+		for(uint16_t i=48;i<52;i++)
+		{
+			#pragma HLS unroll
+			if(a[i]>a[i+4])
+				{
+					temp=a[i+4];
+					a[i+4]=a[i];
+					a[i]=temp;
+				}
+		}
+		for(uint16_t i=56;i<60;i++)
+		{
+			#pragma HLS unroll
+			if(a[i]<a[i+4])
+				{
+					temp=a[i+4];
+					a[i+4]=a[i];
+					a[i]=temp;
+				}
+		}
+		for(uint16_t i=64;i<68;i++)
 			{
-				temp=a[1];
-				a[1]=a[5];
-				a[5]=temp;
+				#pragma HLS unroll
+				if(a[i]>a[i+4])
+					{
+						temp=a[i+4];
+						a[i+4]=a[i];
+						a[i]=temp;
+					}
 			}
-	if(a[2]<a[6])
+			for(uint16_t i=72;i<76;i++)
 			{
-				temp=a[6];
-				a[6]=a[2];
-				a[2]=temp;
+				#pragma HLS unroll
+				if(a[i]<a[i+4])
+					{
+						temp=a[i+4];
+						a[i+4]=a[i];
+						a[i]=temp;
+					}
 			}
-	if(a[3]<a[7])
+			for(uint16_t i=80;i<84;i++)
 			{
-				temp=a[3];
-				a[3]=a[7];
-				a[7]=temp;
+				#pragma HLS unroll
+				if(a[i]>a[i+4])
+					{
+						temp=a[i+4];
+						a[i+4]=a[i];
+						a[i]=temp;
+					}
 			}
+			for(uint16_t i=88;i<92;i++)
+			{
+				#pragma HLS unroll
+				if(a[i]<a[i+4])
+					{
+						temp=a[i+4];
+						a[i+4]=a[i];
+						a[i]=temp;
+					}
+			}
+			for(uint16_t i=96;i<100;i++)
+				{
+					#pragma HLS unroll
+					if(a[i]>a[i+4])
+						{
+							temp=a[i+4];
+							a[i+4]=a[i];
+							a[i]=temp;
+						}
+				}
+				for(uint16_t i=104;i<108;i++)
+				{
+					#pragma HLS unroll
+					if(a[i]<a[i+4])
+						{
+							temp=a[i+4];
+							a[i+4]=a[i];
+							a[i]=temp;
+						}
+				}
+				for(uint16_t i=112;i<116;i++)
+				{
+					#pragma HLS unroll
+					if(a[i]>a[i+4])
+						{
+							temp=a[i+4];
+							a[i+4]=a[i];
+							a[i]=temp;
+						}
+				}
+				for(uint16_t i=120;i<124;i++)
+				{
+					#pragma HLS unroll
+					if(a[i]<a[i+4])
+						{
+							temp=a[i+4];
+							a[i+4]=a[i];
+							a[i]=temp;
+						}
+				}
 
-		bitonic41(0);
+	for(uint16_t i=0;i<5;i=i+4)
+	{
+		#pragma HLS unroll
+		if(a[i]>a[i+2])
+			{
+				temp=a[i+2];
+				a[i+2]=a[i];
+				a[i]=temp;
+			}
+		if(a[i+1]>a[i+3])
+			{
+				temp=a[i+3];
+				a[i+3]=a[i+1];
+				a[i+1]=temp;
+			}
+	}
+	for(uint16_t i=8;i<13;i=i+4)
+	{
+		#pragma HLS unroll
+		if(a[i]<a[i+2])
+			{
+				temp=a[i+2];
+				a[i+2]=a[i];
+				a[i]=temp;
+			}
+		if(a[i+1]<a[i+3])
+			{
+				temp=a[i+3];
+				a[i+3]=a[i+1];
+				a[i+1]=temp;
+			}
+	}
+	for(uint16_t i=16;i<21;i=i+4)
+	{
+		#pragma HLS unroll
+		if(a[i]>a[i+2])
+			{
+				temp=a[i+2];
+				a[i+2]=a[i];
+				a[i]=temp;
+			}
+		if(a[i+1]>a[i+3])
+			{
+				temp=a[i+3];
+				a[i+3]=a[i+1];
+				a[i+1]=temp;
+			}
+	}
+	for(uint16_t i=24;i<29;i=i+4)
+	{
+		#pragma HLS unroll
+		if(a[i]<a[i+2])
+			{
+				temp=a[i+2];
+				a[i+2]=a[i];
+				a[i]=temp;
+			}
+		if(a[i+1]<a[i+3])
+			{
+				temp=a[i+3];
+				a[i+3]=a[i+1];
+				a[i+1]=temp;
+			}
+	}
+	for(uint16_t i=32;i<37;i=i+4)
+		{
+			#pragma HLS unroll
+			if(a[i]>a[i+2])
+				{
+					temp=a[i+2];
+					a[i+2]=a[i];
+					a[i]=temp;
+				}
+			if(a[i+1]>a[i+3])
+				{
+					temp=a[i+3];
+					a[i+3]=a[i+1];
+					a[i+1]=temp;
+				}
+		}
+		for(uint16_t i=40;i<45;i=i+4)
+		{
+			#pragma HLS unroll
+			if(a[i]<a[i+2])
+				{
+					temp=a[i+2];
+					a[i+2]=a[i];
+					a[i]=temp;
+				}
+			if(a[i+1]<a[i+3])
+				{
+					temp=a[i+3];
+					a[i+3]=a[i+1];
+					a[i+1]=temp;
+				}
+		}
+		for(uint16_t i=48;i<53;i=i+4)
+		{
+			#pragma HLS unroll
+			if(a[i]>a[i+2])
+				{
+					temp=a[i+2];
+					a[i+2]=a[i];
+					a[i]=temp;
+				}
+			if(a[i+1]>a[i+3])
+				{
+					temp=a[i+3];
+					a[i+3]=a[i+1];
+					a[i+1]=temp;
+				}
+		}
+		for(uint16_t i=56;i<61;i=i+4)
+		{
+			#pragma HLS unroll
+			if(a[i]<a[i+2])
+				{
+					temp=a[i+2];
+					a[i+2]=a[i];
+					a[i]=temp;
+				}
+			if(a[i+1]<a[i+3])
+				{
+					temp=a[i+3];
+					a[i+3]=a[i+1];
+					a[i+1]=temp;
+				}
+		}
+		for(uint16_t i=64;i<69;i=i+4)
+			{
+				#pragma HLS unroll
+				if(a[i]>a[i+2])
+					{
+						temp=a[i+2];
+						a[i+2]=a[i];
+						a[i]=temp;
+					}
+				if(a[i+1]>a[i+3])
+					{
+						temp=a[i+3];
+						a[i+3]=a[i+1];
+						a[i+1]=temp;
+					}
+			}
+			for(uint16_t i=72;i<77;i=i+4)
+			{
+				#pragma HLS unroll
+				if(a[i]<a[i+2])
+					{
+						temp=a[i+2];
+						a[i+2]=a[i];
+						a[i]=temp;
+					}
+				if(a[i+1]<a[i+3])
+					{
+						temp=a[i+3];
+						a[i+3]=a[i+1];
+						a[i+1]=temp;
+					}
+			}
+			for(uint16_t i=80;i<85;i=i+4)
+			{
+				#pragma HLS unroll
+				if(a[i]>a[i+2])
+					{
+						temp=a[i+2];
+						a[i+2]=a[i];
+						a[i]=temp;
+					}
+				if(a[i+1]>a[i+3])
+					{
+						temp=a[i+3];
+						a[i+3]=a[i+1];
+						a[i+1]=temp;
+					}
+			}
+			for(uint16_t i=88;i<93;i=i+4)
+			{
+				#pragma HLS unroll
+				if(a[i]<a[i+2])
+					{
+						temp=a[i+2];
+						a[i+2]=a[i];
+						a[i]=temp;
+					}
+				if(a[i+1]<a[i+3])
+					{
+						temp=a[i+3];
+						a[i+3]=a[i+1];
+						a[i+1]=temp;
+					}
+			}
+			for(uint16_t i=96;i<101;i=i+4)
+				{
+					#pragma HLS unroll
+					if(a[i]>a[i+2])
+						{
+							temp=a[i+2];
+							a[i+2]=a[i];
+							a[i]=temp;
+						}
+					if(a[i+1]>a[i+3])
+						{
+							temp=a[i+3];
+							a[i+3]=a[i+1];
+							a[i+1]=temp;
+						}
+				}
+				for(uint16_t i=104;i<109;i=i+4)
+				{
+					#pragma HLS unroll
+					if(a[i]<a[i+2])
+						{
+							temp=a[i+2];
+							a[i+2]=a[i];
+							a[i]=temp;
+						}
+					if(a[i+1]<a[i+3])
+						{
+							temp=a[i+3];
+							a[i+3]=a[i+1];
+							a[i+1]=temp;
+						}
+				}
+				for(uint16_t i=112;i<117;i=i+4)
+				{
+					#pragma HLS unroll
+					if(a[i]>a[i+2])
+						{
+							temp=a[i+2];
+							a[i+2]=a[i];
+							a[i]=temp;
+						}
+					if(a[i+1]>a[i+3])
+						{
+							temp=a[i+3];
+							a[i+3]=a[i+1];
+							a[i+1]=temp;
+						}
+				}
+				for(uint16_t i=120;i<125;i=i+4)
+				{
+					#pragma HLS unroll
+					if(a[i]<a[i+2])
+						{
+							temp=a[i+2];
+							a[i+2]=a[i];
+							a[i]=temp;
+						}
+					if(a[i+1]<a[i+3])
+						{
+							temp=a[i+3];
+							a[i+3]=a[i+1];
+							a[i+1]=temp;
+						}
+				}
 
+	for(uint16_t i=0;i<7;i=i+2)
+	{
+		#pragma HLS unroll
+		if(a[i]>a[i+1])
+			{
+				temp=a[i+1];
+				a[i+1]=a[i];
+				a[i]=temp;
+			}
+	}
+	for(uint16_t i=8;i<15;i=i+2)
+	{
+		#pragma HLS unroll
+		if(a[i]<a[i+1])
+			{
+				temp=a[i+1];
+				a[i+1]=a[i];
+				a[i]=temp;
+			}
+	}
+	for(uint16_t i=16;i<23;i=i+2)
+	{
+		#pragma HLS unroll
+		if(a[i]>a[i+1])
+			{
+				temp=a[i+1];
+				a[i+1]=a[i];
+				a[i]=temp;
+			}
+	}
+	for(uint16_t i=24;i<31;i=i+2)
+	{
+		#pragma HLS unroll
+		if(a[i]<a[i+1])
+			{
+				temp=a[i+1];
+				a[i+1]=a[i];
+				a[i]=temp;
+			}
+	}
+	for(uint16_t i=32;i<39;i=i+2)
+		{
+			#pragma HLS unroll
+			if(a[i]>a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+		}
+		for(uint16_t i=40;i<47;i=i+2)
+		{
+			#pragma HLS unroll
+			if(a[i]<a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+		}
+		for(uint16_t i=48;i<55;i=i+2)
+		{
+			#pragma HLS unroll
+			if(a[i]>a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+		}
+		for(uint16_t i=56;i<63;i=i+2)
+		{
+			#pragma HLS unroll
+			if(a[i]<a[i+1])
+				{
+					temp=a[i+1];
+					a[i+1]=a[i];
+					a[i]=temp;
+				}
+		}
+		for(uint16_t i=64;i<71;i=i+2)
+			{
+				#pragma HLS unroll
+				if(a[i]>a[i+1])
+					{
+						temp=a[i+1];
+						a[i+1]=a[i];
+						a[i]=temp;
+					}
+			}
+			for(uint16_t i=72;i<79;i=i+2)
+			{
+				#pragma HLS unroll
+				if(a[i]<a[i+1])
+					{
+						temp=a[i+1];
+						a[i+1]=a[i];
+						a[i]=temp;
+					}
+			}
+			for(uint16_t i=80;i<87;i=i+2)
+			{
+				#pragma HLS unroll
+				if(a[i]>a[i+1])
+					{
+						temp=a[i+1];
+						a[i+1]=a[i];
+						a[i]=temp;
+					}
+			}
+			for(uint16_t i=88;i<95;i=i+2)
+			{
+				#pragma HLS unroll
+				if(a[i]<a[i+1])
+					{
+						temp=a[i+1];
+						a[i+1]=a[i];
+						a[i]=temp;
+					}
+			}for(uint16_t i=96;i<103;i=i+2)
+			{
+				#pragma HLS unroll
+				if(a[i]>a[i+1])
+					{
+						temp=a[i+1];
+						a[i+1]=a[i];
+						a[i]=temp;
+					}
+			}
+			for(uint16_t i=104;i<111;i=i+2)
+			{
+				#pragma HLS unroll
+				if(a[i]<a[i+1])
+					{
+						temp=a[i+1];
+						a[i+1]=a[i];
+						a[i]=temp;
+					}
+			}
+			for(uint16_t i=112;i<119;i=i+2)
+			{
+				#pragma HLS unroll
+				if(a[i]>a[i+1])
+					{
+						temp=a[i+1];
+						a[i+1]=a[i];
+						a[i]=temp;
+					}
+			}
+			for(uint16_t i=120;i<127;i=i+2)
+			{
+				#pragma HLS unroll
+				if(a[i]<a[i+1])
+					{
+						temp=a[i+1];
+						a[i+1]=a[i];
+						a[i]=temp;
+					}
+			}
+bitonic16(a);
+}
+void bitonic4(uint16_t a[128])
+{
+	uint16_t temp;
+////#pragma HLS dataflow
+// comparators in blocks of 4
+	for(uint16_t i=0;i<2;i++)
+	{
+		#pragma HLS unroll
+			if(a[i]>a[i+2])
+							{temp=a[i];
+							a[i]=a[i+2];
+							a[i+2]=temp;
+							}
+	}
+	for(uint16_t i=4;i<6;i++)
+	{
+#pragma HLS unroll
+		if(a[i]<a[i+2])
+							{temp=a[i];
+							a[i]=a[i+2];
+							a[i+2]=temp;
+							}
+	}
+	for(uint16_t i=8;i<10;i++)
+	{
+#pragma HLS unroll
+			if(a[i]>a[i+2])
+							{temp=a[i];
+							a[i]=a[i+2];
+							a[i+2]=temp;
+							}
+	}
+	for(uint16_t i=12;i<14;i++)
+	{
+#pragma HLS unroll
+			if(a[i]<a[i+2])
+							{temp=a[i];
+							a[i]=a[i+2];
+							a[i+2]=temp;
+							}
+	}
+	for(uint16_t i=16;i<18;i++)
+	{
+#pragma HLS unroll
+			if(a[i]>a[i+2])
+							{temp=a[i];
+							a[i]=a[i+2];
+							a[i+2]=temp;
+							}
+	}
+	for(uint16_t i=20;i<22;i++)
+	{
+#pragma HLS unroll
+			if(a[i]<a[i+2])
+							{temp=a[i];
+							a[i]=a[i+2];
+							a[i+2]=temp;
+							}
+	}
+	for(uint16_t i=24;i<26;i++)
+	{
+#pragma HLS unroll
+			if(a[i]>a[i+2])
+							{temp=a[i];
+							a[i]=a[i+2];
+							a[i+2]=temp;
+							}
+	}
+	for(uint16_t i=28;i<30;i++)
+	{
+#pragma HLS unroll
+			if(a[i]<a[i+2])
+							{temp=a[i];
+							a[i]=a[i+2];
+							a[i+2]=temp;
+							}
+	}
+	for(uint16_t i=32;i<34;i++)
+		{
+			#pragma HLS unroll
+				if(a[i]>a[i+2])
+								{temp=a[i];
+								a[i]=a[i+2];
+								a[i+2]=temp;
+								}
+		}
+		for(uint16_t i=36;i<38;i++)
+		{
+	#pragma HLS unroll
+			if(a[i]<a[i+2])
+								{temp=a[i];
+								a[i]=a[i+2];
+								a[i+2]=temp;
+								}
+		}
+		for(uint16_t i=40;i<42;i++)
+		{
+	#pragma HLS unroll
+				if(a[i]>a[i+2])
+								{temp=a[i];
+								a[i]=a[i+2];
+								a[i+2]=temp;
+								}
+		}
+		for(uint16_t i=44;i<46;i++)
+		{
+	#pragma HLS unroll
+				if(a[i]<a[i+2])
+								{temp=a[i];
+								a[i]=a[i+2];
+								a[i+2]=temp;
+								}
+		}
+		for(uint16_t i=48;i<50;i++)
+		{
+	#pragma HLS unroll
+				if(a[i]>a[i+2])
+								{temp=a[i];
+								a[i]=a[i+2];
+								a[i+2]=temp;
+								}
+		}
+		for(uint16_t i=52;i<54;i++)
+		{
+	#pragma HLS unroll
+				if(a[i]<a[i+2])
+								{temp=a[i];
+								a[i]=a[i+2];
+								a[i+2]=temp;
+								}
+		}
+		for(uint16_t i=56;i<58;i++)
+		{
+	#pragma HLS unroll
+				if(a[i]>a[i+2])
+								{temp=a[i];
+								a[i]=a[i+2];
+								a[i+2]=temp;
+								}
+		}
+		for(uint16_t i=60;i<62;i++)
+		{
+	#pragma HLS unroll
+				if(a[i]<a[i+2])
+								{temp=a[i];
+								a[i]=a[i+2];
+								a[i+2]=temp;
+								}
+		}
+		for(uint16_t i=64;i<66;i++)
+			{
+				#pragma HLS unroll
+					if(a[i]>a[i+2])
+									{temp=a[i];
+									a[i]=a[i+2];
+									a[i+2]=temp;
+									}
+			}
+			for(uint16_t i=68;i<70;i++)
+			{
+		#pragma HLS unroll
+				if(a[i]<a[i+2])
+									{temp=a[i];
+									a[i]=a[i+2];
+									a[i+2]=temp;
+									}
+			}
+			for(uint16_t i=72;i<74;i++)
+			{
+		#pragma HLS unroll
+					if(a[i]>a[i+2])
+									{temp=a[i];
+									a[i]=a[i+2];
+									a[i+2]=temp;
+									}
+			}
+			for(uint16_t i=76;i<78;i++)
+			{
+		#pragma HLS unroll
+					if(a[i]<a[i+2])
+									{temp=a[i];
+									a[i]=a[i+2];
+									a[i+2]=temp;
+									}
+			}
+			for(uint16_t i=80;i<82;i++)
+			{
+		#pragma HLS unroll
+					if(a[i]>a[i+2])
+									{temp=a[i];
+									a[i]=a[i+2];
+									a[i+2]=temp;
+									}
+			}
+			for(uint16_t i=84;i<86;i++)
+			{
+		#pragma HLS unroll
+					if(a[i]<a[i+2])
+									{temp=a[i];
+									a[i]=a[i+2];
+									a[i+2]=temp;
+									}
+			}
+			for(uint16_t i=88;i<90;i++)
+			{
+		#pragma HLS unroll
+					if(a[i]>a[i+2])
+									{temp=a[i];
+									a[i]=a[i+2];
+									a[i+2]=temp;
+									}
+			}
+			for(uint16_t i=92;i<94;i++)
+			{
+		#pragma HLS unroll
+					if(a[i]<a[i+2])
+									{temp=a[i];
+									a[i]=a[i+2];
+									a[i+2]=temp;
+									}
+			}
+			for(uint16_t i=96;i<98;i++)
+			{
+				#pragma HLS unroll
+					if(a[i]>a[i+2])
+									{temp=a[i];
+									a[i]=a[i+2];
+									a[i+2]=temp;
+									}
+			}
+			for(uint16_t i=100;i<102;i++)
+			{
+		#pragma HLS unroll
+				if(a[i]<a[i+2])
+									{temp=a[i];
+									a[i]=a[i+2];
+									a[i+2]=temp;
+									}
+			}
+			for(uint16_t i=104;i<106;i++)
+			{
+		#pragma HLS unroll
+					if(a[i]>a[i+2])
+									{temp=a[i];
+									a[i]=a[i+2];
+									a[i+2]=temp;
+									}
+			}
+			for(uint16_t i=108;i<110;i++)
+			{
+		#pragma HLS unroll
+					if(a[i]<a[i+2])
+									{temp=a[i];
+									a[i]=a[i+2];
+									a[i+2]=temp;
+									}
+			}
+			for(uint16_t i=112;i<114;i++)
+			{
+		#pragma HLS unroll
+					if(a[i]>a[i+2])
+									{temp=a[i];
+									a[i]=a[i+2];
+									a[i+2]=temp;
+									}
+			}
+			for(uint16_t i=116;i<118;i++)
+			{
+		#pragma HLS unroll
+					if(a[i]<a[i+2])
+									{temp=a[i];
+									a[i]=a[i+2];
+									a[i+2]=temp;
+									}
+			}
+			for(uint16_t i=120;i<122;i++)
+			{
+		#pragma HLS unroll
+					if(a[i]>a[i+2])
+									{temp=a[i];
+									a[i]=a[i+2];
+									a[i+2]=temp;
+									}
+			}
+			for(uint16_t i=124;i<126;i++)
+			{
+		#pragma HLS unroll
+					if(a[i]<a[i+2])
+									{temp=a[i];
+									a[i]=a[i+2];
+									a[i+2]=temp;
+									}
+			}
+	for(uint16_t i=0;i<3;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]>a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=4;i<7;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]<a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=8;i<11;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]>a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=12;i<15;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]<a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=16;i<19;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]>a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=20;i<23;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]<a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=24;i<27;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]>a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=28;i<31;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]<a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=32;i<35;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]>a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=36;i<39;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]<a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=40;i<43;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]>a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=44;i<47;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]<a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=48;i<51;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]>a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=52;i<55;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]<a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=56;i<59;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]>a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=60;i<63;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]<a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=64;i<67;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]>a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=68;i<71;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]<a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=72;i<75;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]>a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=76;i<79;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]<a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=80;i<83;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]>a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=84;i<87;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]<a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=88;i<91;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]>a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=92;i<95;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]<a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=96;i<99;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]>a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=100;i<103;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]<a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=104;i<107;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]>a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=108;i<111;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]<a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=112;i<115;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]>a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=116;i<119;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]<a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=120;i<123;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]>a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	for(uint16_t i=124;i<127;i=i+2)
+	{
+	#pragma HLS unroll
+		if(a[i]<a[i+1])
+							{temp=a[i];
+							a[i]=a[i+1];
+							a[i+1]=temp;
+							}
+	}
+	bitonic8(a);
 
 }
-void bitsort()
+void bitsort(uint16_t b[128])
 {
+	uint16_t temp;// temporary copying variable
+	uint16_t a[128];
 #pragma HLS PIPELINE II=6
 #pragma HLS ARRAY_PARTITION variable=a complete dim=0
+#pragma HLS ARRAY_PARTITION variable=b complete dim=0
+////#pragma HLS dataflow
+//flushing, necessary to prevent memory leaks	
+for(uint16_t i=0;i<128;i++)
+{
+#pragma HLS unroll
+	a[i]=0;
+}
+//copying input array uint16_to global array
+for(uint16_t i=0;i<128;i++)
+{
+#pragma HLS unroll
+	a[i]=b[i];
+}
+//first level of binary comparators
+for(uint16_t i=0;i<124;i=i+4)
+{
+#pragma HLS unroll
+if(a[i]>a[i+1])
+{temp=a[i+1];
+a[i+1]=a[i];
+a[i]=temp;
+}
 
-		bitonic21(0);
-		bitonic22(2);
-		bitonic21(4);
-		bitonic22(6);
+if(a[i+2]<a[i+3])
+{temp=a[i+3];
+a[i+3]=a[i+2];
+a[i+2]=temp;
+}
+	}
 
-	 bitonic41(0);
-	 bitonic42(4);
-	 bitonic8();
-	
-	
+
+		// passing control to second level of quaternary comparators
+		bitonic4(a);
+		//copying sorted array back uint16_to output variable
+		for(uint16_t i=0;i<128;i++)
+		{
+		#pragma HLS unroll
+			b[i]=a[i];
+		}
+
 
 
 }
+
+
+
