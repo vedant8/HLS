@@ -1963,75 +1963,218 @@ bool getECAL_ClustersInTower(ap_fixed<16,9> crystals[NCrystalsPerEtaPhi][NCrysta
   // Small ECAL_Cluster ET is just the 3x5 around the peak
   *ECAL_ClusterET = 0;
  if (*peakEta==4){
- 	//if (*peakPhi==2){
+ 	if (*peakPhi==2){
+ 		// std::cout<<"Left 2x5"<<std::endl;
+	 	// for(int dEtaL = -1; dEtaL <= 0; dEtaL++) {
+			// #pragma HLS UNROLL
+		 //  int eta = *peakEta + dEtaL;
+		 //  for(int dPhiL = -2; dPhiL <= 2; dPhiL++) {
+			// 		#pragma HLS UNROLL
+			// 	  int phi = *peakPhi + dPhiL;
+			// 	  if((phi>=0)&&(phi<NCrystalsPerEtaPhi)){//condition encompassing all possible clusters on left edge, 2x3, 2x4 2x5
+		 //   			 *ECAL_ClusterET += crystals[eta][phi];
+			// 	  	}
+		 //  			}
+			// }
  		std::cout<<"Left 2x5"<<std::endl;
-	 	for(int dEtaL = -1; dEtaL <= 0; dEtaL++) {
-			#pragma HLS UNROLL
-		  int eta = *peakEta + dEtaL;
-		  for(int dPhiL = -2; dPhiL <= 2; dPhiL++) {
-					#pragma HLS UNROLL
-				  int phi = *peakPhi + dPhiL;
-				  if((phi>=0)&&(phi<NCrystalsPerEtaPhi)){//condition encompassing all possible clusters on left edge, 2x3, 2x4 2x5
-		   			 *ECAL_ClusterET += crystals[eta][phi];
-				  	}
-		  			}
+		 	for(int dEtaL = -1; dEtaL <= 0; dEtaL++) {
+		#pragma HLS UNROLL
+			  int eta = *peakEta + dEtaL;
+			  
+			    *ECAL_ClusterET += etaStripSum[eta];
+			  
 			}
-	//}
- // 	else if(*peakPhi==1){
-	// 	 		std::cout<<"Left 2x4"<<std::endl;
-	// 	 	for(int dEtaL = -1; dEtaL <= 0; dEtaL++) {
-	// 	#pragma HLS UNROLL
-	// 		  int eta = *peakEta + dEtaL;
+			//*ECAL_ClusterET=*ECAL_ClusterET-(crystals[4][4]+crystals[3][4]);
+	}
+ 	else if(*peakPhi==1){
+		 		std::cout<<"Left 2x4"<<std::endl;
+		 	for(int dEtaL = -1; dEtaL <= 0; dEtaL++) {
+		#pragma HLS UNROLL
+			  int eta = *peakEta + dEtaL;
 			  
-	// 		    *ECAL_ClusterET += etaStripSum[eta];
+			    *ECAL_ClusterET += (etaStripSum[eta]-crystals[eta][4]);
 			  
-	// 		}
-	// 		*ECAL_ClusterET=*ECAL_ClusterET-(crystals[4][4]+crystals[3][4]);
-	// 	}
-	// else if(*peakPhi==0){
-	// 	 		std::cout<<"Left 2x3"<<std::endl;
-	// 	 	for(int dEtaL = -1; dEtaL <= 0; dEtaL++) {
-	// 	#pragma HLS UNROLL
-	// 		  int eta = *peakEta + dEtaL;
+			}
+			//*ECAL_ClusterET=*ECAL_ClusterET-(crystals[4][4]+crystals[3][4]);
+		}
+	else if(*peakPhi==0){
+		 		std::cout<<"Left 2x3"<<std::endl;
+		 	for(int dEtaL = -1; dEtaL <= 0; dEtaL++) {
+		#pragma HLS UNROLL
+			  int eta = *peakEta + dEtaL;
 			  
-	// 		    *ECAL_ClusterET += etaStripSum[eta];
+			    *ECAL_ClusterET += (etaStripSum[eta]-crystals[eta][3]-crystals[eta][4]);
 			  
-	// 		}
-	// 		*ECAL_ClusterET=*ECAL_ClusterET-(crystals[3][3]+crystals[4][3]+crystals[4][4]+crystals[3][4]);
-	// 	}	
+			}
+			//*ECAL_ClusterET=*ECAL_ClusterET-(crystals[3][3]+crystals[4][3]+crystals[4][4]+crystals[3][4]);
+		}	
+		else if(*peakPhi==3){
+		 		std::cout<<"Left 2x4"<<std::endl;
+		 	for(int dEtaL = -1; dEtaL <= 0; dEtaL++) {
+		#pragma HLS UNROLL
+			  int eta = *peakEta + dEtaL;
+			  
+			    *ECAL_ClusterET += (etaStripSum[eta]-crystals[eta][0]);
+			  
+			}
+			//*ECAL_ClusterET=*ECAL_ClusterET-(crystals[4][0]+crystals[3][0]);
+		}
+	else if(*peakPhi==4){
+		 		std::cout<<"Left 2x3"<<std::endl;
+		 	for(int dEtaL = -1; dEtaL <= 0; dEtaL++) {
+		#pragma HLS UNROLL
+			  int eta = *peakEta + dEtaL;
+			  
+			    *ECAL_ClusterET += (etaStripSum[eta]-crystals[eta][0]-crystals[eta][1]);
+			  
+			}
+			//*ECAL_ClusterET=*ECAL_ClusterET-(crystals[3][0]+crystals[4][0]+crystals[4][1]+crystals[3][1]);
+		}	
 	
  }
 	else if (*peakEta==0){
 		
-		std::cout<<"Right 2x5"<<std::endl;
-	for(int dEtaR = 0; dEtaR <= 1; dEtaR++) {
-#pragma HLS UNROLL
-	  int eta = *peakEta + dEtaR;
-	  for(int dPhiR = -2; dPhiR <= 2; dPhiR++)
-	  {
-	  		#pragma HLS UNROLL
-			int phi = *peakPhi + dPhiR;	
-			if((phi>=0)&&(phi<=NCrystalsPerEtaPhi)){//condition encompassing all possible clusters on right edge, 2x3, 2x4 2x5
-		   			 *ECAL_ClusterET += crystals[eta][phi];
-				  	}
-	  }	   
+// 		std::cout<<"Right 2x5"<<std::endl;
+// 	for(int dEtaR = 0; dEtaR <= 1; dEtaR++) {
+// #pragma HLS UNROLL
+// 	  int eta = *peakEta + dEtaR;
+// 	  for(int dPhiR = -2; dPhiR <= 2; dPhiR++)
+// 	  {
+// 	  		#pragma HLS UNROLL
+// 			int phi = *peakPhi + dPhiR;	
+// 			if((phi>=0)&&(phi<=NCrystalsPerEtaPhi)){//condition encompassing all possible clusters on right edge, 2x3, 2x4 2x5
+// 		   			 *ECAL_ClusterET += crystals[eta][phi];
+// 				  	}
+// 	  }	   
 	  
+// 	}
+		if (*peakPhi==2){
+ 		
+ 		std::cout<<"Right 2x5"<<std::endl;
+		 	for(int dEtaR = 0; dEtaR <= 1; dEtaR++) {
+		#pragma HLS UNROLL
+			  int eta = *peakEta + dEtaR;
+			  
+			    *ECAL_ClusterET += etaStripSum[eta];
+			  
+			}
+			//*ECAL_ClusterET=*ECAL_ClusterET-(crystals[4][4]+crystals[3][4]);
 	}
+ 	else if(*peakPhi==1){
+		 		std::cout<<"Right 2x4"<<std::endl;
+		 	 for(int dEtaR = 0; dEtaR <= 1; dEtaR++){
+		#pragma HLS UNROLL
+			  int eta = *peakEta + dEtaR;
+			  
+			    *ECAL_ClusterET += (etaStripSum[eta]-crystals[eta][4]);
+			  
+			}
+			//*ECAL_ClusterET=*ECAL_ClusterET-(crystals[0][4]+crystals[1][4]);
+		}
+	else if(*peakPhi==0){
+		 		std::cout<<"Right 2x3"<<std::endl;
+		 	for(int dEtaR = 0; dEtaR <= 1; dEtaR++) {
+		#pragma HLS UNROLL
+			  int eta = *peakEta + dEtaR;
+			  
+			    *ECAL_ClusterET += (etaStripSum[eta]-crystals[eta][3]-crystals[eta][4]);
+			  
+			}
+			//*ECAL_ClusterET=*ECAL_ClusterET-(crystals[0][3]+crystals[1][3]+crystals[0][4]+crystals[1][4]);
+		}	
+		else if(*peakPhi==3){
+		 		std::cout<<"Right 2x4"<<std::endl;
+		 	for(int dEtaR = 0; dEtaR <= 1; dEtaR++) {
+		#pragma HLS UNROLL
+			  int eta = *peakEta + dEtaR;
+			  
+			    *ECAL_ClusterET += (etaStripSum[eta]-crystals[eta][0]);
+			  
+			}
+			//*ECAL_ClusterET=*ECAL_ClusterET-(crystals[0][0]+crystals[1][0]);
+		}
+	else if(*peakPhi==4){
+		 		std::cout<<"Right 2x3"<<std::endl;
+		 	for(int dEtaR = 0; dEtaR <= 1; dEtaR++) {
+		#pragma HLS UNROLL
+			  int eta = *peakEta + dEtaR;
+			  
+			    *ECAL_ClusterET += (etaStripSum[eta]-crystals[eta][0]-crystals[eta][1]);
+			  
+			}
+			//*ECAL_ClusterET=*ECAL_ClusterET-(crystals[0][0]+crystals[1][0]+crystals[0][1]+crystals[1][1]);
+		}	
+	
+
 	}
 	else
 	{std::cout<<"3x5"<<std::endl;
-		for(int dEta = -1; dEta <= 1; dEta++) {
-#pragma HLS UNROLL
-      int eta = *peakEta + dEta;
-	  for(int dPhi = -2; dPhi <= 2; dPhi++)
-	  {
-	 		#pragma HLS UNROLL
-			int phi = *peakPhi + dPhi;	
-			if((phi>=0)&&(phi<=NCrystalsPerEtaPhi)){//condition encompassing all possible clusters, 3x3, 3x4 3x5
-		   			 *ECAL_ClusterET += crystals[eta][phi];
-				  	}
-	  }	   
-  }
+// 		for(int dEta = -1; dEta <= 1; dEta++) {
+// #pragma HLS UNROLL
+//       int eta = *peakEta + dEta;
+// 	  for(int dPhi = -2; dPhi <= 2; dPhi++)
+// 	  {
+// 	 		#pragma HLS UNROLL
+// 			int phi = *peakPhi + dPhi;	
+// 			if((phi>=0)&&(phi<=NCrystalsPerEtaPhi)){//condition encompassing all possible clusters, 3x3, 3x4 3x5
+// 		   			 *ECAL_ClusterET += crystals[eta][phi];
+// 				  	}
+// 	  }	   
+//   }
+	if (*peakPhi==2){
+ 		
+		 	for(int dEta = -1; dEta <= 1; dEta++){
+		#pragma HLS UNROLL
+			  int eta = *peakEta + dEta;
+			  
+			    *ECAL_ClusterET += etaStripSum[eta];
+			  
+			}
+			//*ECAL_ClusterET=*ECAL_ClusterET-(crystals[4][4]+crystals[3][4]);
+	}
+ 	else if(*peakPhi==1){
+		 	 for(int dEta = -1; dEta <= 1; dEta++){
+		#pragma HLS UNROLL
+			  int eta = *peakEta + dEta;
+			  
+			    *ECAL_ClusterET += (etaStripSum[eta]-crystals[eta][4]);
+			  
+			}
+			//*ECAL_ClusterET=*ECAL_ClusterET-(crystals[0][4]+crystals[1][4]);
+		}
+	else if(*peakPhi==0){
+		 	for(int dEta = -1; dEta <= 1; dEta++) {
+		#pragma HLS UNROLL
+			  int eta = *peakEta + dEta;
+			  
+			    *ECAL_ClusterET += (etaStripSum[eta]-crystals[eta][3]-crystals[eta][4]);
+			  
+			}
+			//*ECAL_ClusterET=*ECAL_ClusterET-(crystals[0][3]+crystals[1][3]+crystals[0][4]+crystals[1][4]);
+		}	
+		else if(*peakPhi==3){
+		 	for(int dEta = -1; dEta <= 1; dEta++) {
+		#pragma HLS UNROLL
+			  int eta = *peakEta + dEta;
+			  
+			    *ECAL_ClusterET += (etaStripSum[eta]-crystals[eta][0]);
+			  
+			}
+			//*ECAL_ClusterET=*ECAL_ClusterET-(crystals[0][0]+crystals[1][0]);
+		}
+	else if(*peakPhi==4){
+		 	for(int dEta = -1; dEta <= 1; dEta++) {
+		#pragma HLS UNROLL
+			  int eta = *peakEta + dEta;
+			  
+			    *ECAL_ClusterET += (etaStripSum[eta]-crystals[eta][0]-crystals[eta][1]);
+			  
+			}
+			//*ECAL_ClusterET=*ECAL_ClusterET-(crystals[0][0]+crystals[1][0]+crystals[0][1]+crystals[1][1]);
+		}	
+	
+
+	
 	}
 	
 	//ECAL_Cluster2X5 is equal to max of 2X5L or 2X5R
