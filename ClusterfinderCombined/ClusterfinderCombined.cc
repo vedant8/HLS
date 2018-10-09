@@ -392,17 +392,17 @@ void ECAL_bitonic16(ap_fixed<16,9> ECAL_Cluster_1_Deposits[32], uint16_t ECAL_Cl
 	  ECAL_Cluster_1_Deposits[i+2]=ECAL_Cluster_1_Deposits[i];
 	  ECAL_Cluster_1_Deposits[i]=temp;
 	  temp=ECAL_ClusterEta[i];
-          ECAL_ClusterEta[i]=ECAL_ClusterEta[i+2];
-          ECAL_ClusterEta[i+2]=temp;
-          temp=ECAL_ClusterPhi[i];
-          ECAL_ClusterPhi[i]=ECAL_ClusterPhi[i+2];
-          ECAL_ClusterPhi[i+2]=temp;
-          temp=ECAL_TowerEta[i];
-          ECAL_TowerEta[i]=ECAL_TowerEta[i+2];
-          ECAL_TowerEta[i+2]=temp;
-          temp=ECAL_TowerPhi[i];
-          ECAL_TowerPhi[i]=ECAL_TowerPhi[i+2];
-          ECAL_TowerPhi[i+2]=temp;
+      ECAL_ClusterEta[i]=ECAL_ClusterEta[i+2];
+      ECAL_ClusterEta[i+2]=temp;
+      temp=ECAL_ClusterPhi[i];
+      ECAL_ClusterPhi[i]=ECAL_ClusterPhi[i+2];
+      ECAL_ClusterPhi[i+2]=temp;
+      temp=ECAL_TowerEta[i];
+      ECAL_TowerEta[i]=ECAL_TowerEta[i+2];
+      ECAL_TowerEta[i+2]=temp;
+      temp=ECAL_TowerPhi[i];
+      ECAL_TowerPhi[i]=ECAL_TowerPhi[i+2];
+      ECAL_TowerPhi[i+2]=temp;
 	}
 
       if(ECAL_Cluster_1_Deposits[i+1]<ECAL_Cluster_1_Deposits[i+3])
@@ -434,17 +434,17 @@ void ECAL_bitonic16(ap_fixed<16,9> ECAL_Cluster_1_Deposits[32], uint16_t ECAL_Cl
 	  ECAL_Cluster_1_Deposits[i+2]=ECAL_Cluster_1_Deposits[i];
 	  ECAL_Cluster_1_Deposits[i]=temp;
 	  temp=ECAL_ClusterEta[i];
-          ECAL_ClusterEta[i]=ECAL_ClusterEta[i+2];
-          ECAL_ClusterEta[i+2]=temp;
-          temp=ECAL_ClusterPhi[i];
-          ECAL_ClusterPhi[i]=ECAL_ClusterPhi[i+2];
-          ECAL_ClusterPhi[i+2]=temp;
-          temp=ECAL_TowerEta[i];
-          ECAL_TowerEta[i]=ECAL_TowerEta[i+2];
-          ECAL_TowerEta[i+2]=temp;
-          temp=ECAL_TowerPhi[i];
-          ECAL_TowerPhi[i]=ECAL_TowerPhi[i+2];
-          ECAL_TowerPhi[i+2]=temp;
+      ECAL_ClusterEta[i]=ECAL_ClusterEta[i+2];
+      ECAL_ClusterEta[i+2]=temp;
+      temp=ECAL_ClusterPhi[i];
+      ECAL_ClusterPhi[i]=ECAL_ClusterPhi[i+2];
+      ECAL_ClusterPhi[i+2]=temp;
+      temp=ECAL_TowerEta[i];
+      ECAL_TowerEta[i]=ECAL_TowerEta[i+2];
+      ECAL_TowerEta[i+2]=temp;
+      temp=ECAL_TowerPhi[i];
+      ECAL_TowerPhi[i]=ECAL_TowerPhi[i+2];
+      ECAL_TowerPhi[i+2]=temp;
 	}
 
 
@@ -590,11 +590,11 @@ void ECAL_bitonic8(ap_fixed<16,9> ECAL_Cluster_1_Deposits[32], uint16_t ECAL_Clu
 	  ECAL_ClusterPhi[i]=ECAL_ClusterPhi[i+4];
 	  ECAL_ClusterPhi[i+4]=temp;
 	  temp=ECAL_TowerEta[i];
-	      ECAL_TowerEta[i]=ECAL_TowerEta[i+4];
-	      ECAL_TowerEta[i+4]=temp;
-	      temp=ECAL_TowerPhi[i];
-	      ECAL_TowerPhi[i]=ECAL_TowerPhi[i+4];
-	      ECAL_TowerPhi[i+4]=temp;
+      ECAL_TowerEta[i]=ECAL_TowerEta[i+4];
+      ECAL_TowerEta[i+4]=temp;
+      temp=ECAL_TowerPhi[i];
+      ECAL_TowerPhi[i]=ECAL_TowerPhi[i+4];
+      ECAL_TowerPhi[i+4]=temp;
 	}
     }
   for(int i=24;i<28;i++)
@@ -612,11 +612,11 @@ void ECAL_bitonic8(ap_fixed<16,9> ECAL_Cluster_1_Deposits[32], uint16_t ECAL_Clu
 	  ECAL_ClusterPhi[i]=ECAL_ClusterPhi[i+4];
 	  ECAL_ClusterPhi[i+4]=temp;
 	  temp=ECAL_TowerEta[i];
-	      ECAL_TowerEta[i]=ECAL_TowerEta[i+4];
-	      ECAL_TowerEta[i+4]=temp;
-	      temp=ECAL_TowerPhi[i];
-	      ECAL_TowerPhi[i]=ECAL_TowerPhi[i+4];
-	      ECAL_TowerPhi[i+4]=temp;
+      ECAL_TowerEta[i]=ECAL_TowerEta[i+4];
+      ECAL_TowerEta[i+4]=temp;
+      temp=ECAL_TowerPhi[i];
+      ECAL_TowerPhi[i]=ECAL_TowerPhi[i+4];
+      ECAL_TowerPhi[i+4]=temp;
 	}
     }
 
@@ -647,7 +647,7 @@ void ECAL_bitonic8(ap_fixed<16,9> ECAL_Cluster_1_Deposits[32], uint16_t ECAL_Clu
 	  temp=ECAL_Cluster_1_Deposits[i+3];
 	  ECAL_Cluster_1_Deposits[i+3]=ECAL_Cluster_1_Deposits[i+1];
 	  ECAL_Cluster_1_Deposits[i+1]=temp;
-          temp=ECAL_ClusterEta[i+1];
+      temp=ECAL_ClusterEta[i+1];
 	  ECAL_ClusterEta[i+1]=ECAL_ClusterEta[i+3];
 	  ECAL_ClusterEta[i+3]=temp;
 	  temp=ECAL_ClusterPhi[i+1];
@@ -796,18 +796,18 @@ void ECAL_bitonic8(ap_fixed<16,9> ECAL_Cluster_1_Deposits[32], uint16_t ECAL_Clu
 	  temp=ECAL_Cluster_1_Deposits[i+1];
 	  ECAL_Cluster_1_Deposits[i+1]=ECAL_Cluster_1_Deposits[i];
 	  ECAL_Cluster_1_Deposits[i]=temp;
-          temp=ECAL_ClusterEta[i];
-          ECAL_ClusterEta[i]=ECAL_ClusterEta[i+1];
-          ECAL_ClusterEta[i+1]=temp;
-          temp=ECAL_ClusterPhi[i];
-          ECAL_ClusterPhi[i]=ECAL_ClusterPhi[i+1];
-          ECAL_ClusterPhi[i+1]=temp;
-          temp=ECAL_TowerEta[i];
-          ECAL_TowerEta[i]=ECAL_TowerEta[i+1];
-          ECAL_TowerEta[i+1]=temp;
-          temp=ECAL_TowerPhi[i];
-          ECAL_TowerPhi[i]=ECAL_TowerPhi[i+1];
-          ECAL_TowerPhi[i+1]=temp;
+      temp=ECAL_ClusterEta[i];
+      ECAL_ClusterEta[i]=ECAL_ClusterEta[i+1];
+      ECAL_ClusterEta[i+1]=temp;
+      temp=ECAL_ClusterPhi[i];
+      ECAL_ClusterPhi[i]=ECAL_ClusterPhi[i+1];
+      ECAL_ClusterPhi[i+1]=temp;
+      temp=ECAL_TowerEta[i];
+      ECAL_TowerEta[i]=ECAL_TowerEta[i+1];
+      ECAL_TowerEta[i+1]=temp;
+      temp=ECAL_TowerPhi[i];
+      ECAL_TowerPhi[i]=ECAL_TowerPhi[i+1];
+      ECAL_TowerPhi[i+1]=temp;
 	}
     }
   for(int i=8;i<15;i=i+2)
@@ -818,18 +818,18 @@ void ECAL_bitonic8(ap_fixed<16,9> ECAL_Cluster_1_Deposits[32], uint16_t ECAL_Clu
 	  temp=ECAL_Cluster_1_Deposits[i+1];
 	  ECAL_Cluster_1_Deposits[i+1]=ECAL_Cluster_1_Deposits[i];
 	  ECAL_Cluster_1_Deposits[i]=temp;
-          temp=ECAL_ClusterEta[i];
-          ECAL_ClusterEta[i]=ECAL_ClusterEta[i+1];
-          ECAL_ClusterEta[i+1]=temp;
-          temp=ECAL_ClusterPhi[i];
-          ECAL_ClusterPhi[i]=ECAL_ClusterPhi[i+1];
-          ECAL_ClusterPhi[i+1]=temp;
-          temp=ECAL_TowerEta[i];
-          ECAL_TowerEta[i]=ECAL_TowerEta[i+1];
-          ECAL_TowerEta[i+1]=temp;
-          temp=ECAL_TowerPhi[i];
-          ECAL_TowerPhi[i]=ECAL_TowerPhi[i+1];
-          ECAL_TowerPhi[i+1]=temp;
+      temp=ECAL_ClusterEta[i];
+      ECAL_ClusterEta[i]=ECAL_ClusterEta[i+1];
+      ECAL_ClusterEta[i+1]=temp;
+      temp=ECAL_ClusterPhi[i];
+      ECAL_ClusterPhi[i]=ECAL_ClusterPhi[i+1];
+      ECAL_ClusterPhi[i+1]=temp;
+      temp=ECAL_TowerEta[i];
+      ECAL_TowerEta[i]=ECAL_TowerEta[i+1];
+      ECAL_TowerEta[i+1]=temp;
+      temp=ECAL_TowerPhi[i];
+      ECAL_TowerPhi[i]=ECAL_TowerPhi[i+1];
+      ECAL_TowerPhi[i+1]=temp;
 	}
     }
 
@@ -841,18 +841,18 @@ void ECAL_bitonic8(ap_fixed<16,9> ECAL_Cluster_1_Deposits[32], uint16_t ECAL_Clu
 	  temp=ECAL_Cluster_1_Deposits[i+1];
 	  ECAL_Cluster_1_Deposits[i+1]=ECAL_Cluster_1_Deposits[i];
 	  ECAL_Cluster_1_Deposits[i]=temp;
-          temp=ECAL_ClusterEta[i];
-          ECAL_ClusterEta[i]=ECAL_ClusterEta[i+1];
-          ECAL_ClusterEta[i+1]=temp;
-          temp=ECAL_ClusterPhi[i];
-          ECAL_ClusterPhi[i]=ECAL_ClusterPhi[i+1];
-          ECAL_ClusterPhi[i+1]=temp;
-          temp=ECAL_TowerEta[i];
-          ECAL_TowerEta[i]=ECAL_TowerEta[i+1];
-          ECAL_TowerEta[i+1]=temp;
-          temp=ECAL_TowerPhi[i];
-          ECAL_TowerPhi[i]=ECAL_TowerPhi[i+1];
-          ECAL_TowerPhi[i+1]=temp;
+      temp=ECAL_ClusterEta[i];
+      ECAL_ClusterEta[i]=ECAL_ClusterEta[i+1];
+      ECAL_ClusterEta[i+1]=temp;
+      temp=ECAL_ClusterPhi[i];
+      ECAL_ClusterPhi[i]=ECAL_ClusterPhi[i+1];
+      ECAL_ClusterPhi[i+1]=temp;
+      temp=ECAL_TowerEta[i];
+      ECAL_TowerEta[i]=ECAL_TowerEta[i+1];
+      ECAL_TowerEta[i+1]=temp;
+      temp=ECAL_TowerPhi[i];
+      ECAL_TowerPhi[i]=ECAL_TowerPhi[i+1];
+      ECAL_TowerPhi[i+1]=temp;
 	}
     }
   for(int i=24;i<31;i=i+2)
@@ -864,17 +864,17 @@ void ECAL_bitonic8(ap_fixed<16,9> ECAL_Cluster_1_Deposits[32], uint16_t ECAL_Clu
 	  ECAL_Cluster_1_Deposits[i+1]=ECAL_Cluster_1_Deposits[i];
 	  ECAL_Cluster_1_Deposits[i]=temp;
 	  temp=ECAL_ClusterEta[i];
-          ECAL_ClusterEta[i]=ECAL_ClusterEta[i+1];
-          ECAL_ClusterEta[i+1]=temp;
-          temp=ECAL_ClusterPhi[i];
-          ECAL_ClusterPhi[i]=ECAL_ClusterPhi[i+1];
-          ECAL_ClusterPhi[i+1]=temp;
-          temp=ECAL_TowerEta[i];
-          ECAL_TowerEta[i]=ECAL_TowerEta[i+1];
-          ECAL_TowerEta[i+1]=temp;
-          temp=ECAL_TowerPhi[i];
-          ECAL_TowerPhi[i]=ECAL_TowerPhi[i+1];
-          ECAL_TowerPhi[i+1]=temp;
+      ECAL_ClusterEta[i]=ECAL_ClusterEta[i+1];
+      ECAL_ClusterEta[i+1]=temp;
+      temp=ECAL_ClusterPhi[i];
+      ECAL_ClusterPhi[i]=ECAL_ClusterPhi[i+1];
+      ECAL_ClusterPhi[i+1]=temp;
+      temp=ECAL_TowerEta[i];
+      ECAL_TowerEta[i]=ECAL_TowerEta[i+1];
+      ECAL_TowerEta[i+1]=temp;
+      temp=ECAL_TowerPhi[i];
+      ECAL_TowerPhi[i]=ECAL_TowerPhi[i+1];
+      ECAL_TowerPhi[i+1]=temp;
 	}
     }
 
@@ -1081,20 +1081,20 @@ void ECAL_bitonic4(ap_fixed<16,9> ECAL_Cluster_1_Deposits[32], uint16_t ECAL_Clu
   #pragma HLS unroll
       if(ECAL_Cluster_1_Deposits[i]>ECAL_Cluster_1_Deposits[i+1])
 	{temp=ECAL_Cluster_1_Deposits[i];
-	  ECAL_Cluster_1_Deposits[i]=ECAL_Cluster_1_Deposits[i+1];
-	  ECAL_Cluster_1_Deposits[i+1]=temp;
-	  temp=ECAL_ClusterEta[i];
-	  ECAL_ClusterEta[i]=ECAL_ClusterEta[i+1];
-	  ECAL_ClusterEta[i+1]=temp;
-	  temp=ECAL_ClusterPhi[i];
-	  ECAL_ClusterPhi[i]=ECAL_ClusterPhi[i+1];
-	  ECAL_ClusterPhi[i+1]=temp;
-	  temp=ECAL_TowerEta[i];
-           ECAL_TowerEta[i]=ECAL_TowerEta[i+1];
-           ECAL_TowerEta[i+1]=temp;
-           temp=ECAL_TowerPhi[i];
-           ECAL_TowerPhi[i]=ECAL_TowerPhi[i+1];
-           ECAL_TowerPhi[i+1]=temp;
+		  ECAL_Cluster_1_Deposits[i]=ECAL_Cluster_1_Deposits[i+1];
+		  ECAL_Cluster_1_Deposits[i+1]=temp;
+		  temp=ECAL_ClusterEta[i];
+		  ECAL_ClusterEta[i]=ECAL_ClusterEta[i+1];
+		  ECAL_ClusterEta[i+1]=temp;
+		  temp=ECAL_ClusterPhi[i];
+		  ECAL_ClusterPhi[i]=ECAL_ClusterPhi[i+1];
+		  ECAL_ClusterPhi[i+1]=temp;
+		  temp=ECAL_TowerEta[i];
+		   ECAL_TowerEta[i]=ECAL_TowerEta[i+1];
+		   ECAL_TowerEta[i+1]=temp;
+		   temp=ECAL_TowerPhi[i];
+		   ECAL_TowerPhi[i]=ECAL_TowerPhi[i+1];
+		   ECAL_TowerPhi[i+1]=temp;
 	}
     }
 
@@ -1962,41 +1962,86 @@ bool getECAL_ClustersInTower(ap_fixed<16,9> crystals[NCrystalsPerEtaPhi][NCrysta
   //std::cout<<"Peak Phi"<<*peakPhi<<std::endl;
   // Small ECAL_Cluster ET is just the 3x5 around the peak
   *ECAL_ClusterET = 0;
-//subECAL_Cluster 2X5L for eta=0
- //uint16_t ECAL_ClusterETL ;
- //ECAL_ClusterETL =0;
  if (*peakEta==4){
  	std::cout<<"Left 2x5"<<std::endl;
- 	for(int dEtaL = -1; dEtaL <= 0; dEtaL++) {
-#pragma HLS UNROLL
-	  int eta = *peakEta + dEtaL;
-	  
-	    *ECAL_ClusterET += etaStripSum[eta];
-	  
-	}
+		 	for(int dEtaL = -1; dEtaL <= 0; dEtaL++) {
+		#pragma HLS UNROLL
+			  int eta = *peakEta + dEtaL;
+			  
+			    *ECAL_ClusterET += etaStripSum[eta];
+			  
+			}
+ 	if(*peakPhi==1){
+		 		std::cout<<"Left 2x4"<<std::endl;
+			*ECAL_ClusterET=*ECAL_ClusterET-(crystals[4][4]+crystals[3][4]);
+		}
+	else if(*peakPhi==0){
+		 		std::cout<<"Left 2x3"<<std::endl;
+		 	*ECAL_ClusterET=*ECAL_ClusterET-(crystals[3][3]+crystals[4][3]+crystals[4][4]+crystals[3][4]);
+		}	
+		else if(*peakPhi==3){
+		 		std::cout<<"Left 2x4"<<std::endl;
+		 	    *ECAL_ClusterET=*ECAL_ClusterET-(crystals[4][0]+crystals[3][0]);
+		}
+	else if(*peakPhi==4){
+		 		std::cout<<"Left 2x3"<<std::endl;
+		 	*ECAL_ClusterET=*ECAL_ClusterET-(crystals[3][0]+crystals[4][0]+crystals[4][1]+crystals[3][1]);
+		}	
+	
  }
 	else if (*peakEta==0){
-		//subECAL_Cluster 2X5R
-	//uint16_t ECAL_ClusterETR ;
-	//ECAL_ClusterETR =0;
-		std::cout<<"Right 2x5"<<std::endl;
-	for(int dEtaR = 0; dEtaR <= 1; dEtaR++) {
-#pragma HLS UNROLL
-	  int eta = *peakEta + dEtaR;
-	  
-	    *ECAL_ClusterET += etaStripSum[eta];
-	  
-	}
+std::cout<<"Right 2x5"<<std::endl;
+		 	for(int dEtaR = 0; dEtaR <= 1; dEtaR++) {
+		#pragma HLS UNROLL
+			  int eta = *peakEta + dEtaR;
+			  
+			    *ECAL_ClusterET += etaStripSum[eta];
+			  
+			}
+		if(*peakPhi==1){
+		 		std::cout<<"Right 2x4"<<std::endl;
+		 	 *ECAL_ClusterET=*ECAL_ClusterET-(crystals[0][4]+crystals[1][4]);
+		}
+	else if(*peakPhi==0){
+		 	*ECAL_ClusterET=*ECAL_ClusterET-(crystals[0][3]+crystals[1][3]+crystals[0][4]+crystals[1][4]);
+		}	
+		else if(*peakPhi==3){
+		 		std::cout<<"Right 2x4"<<std::endl;
+		 	*ECAL_ClusterET=*ECAL_ClusterET-(crystals[0][0]+crystals[1][0]);
+		}
+	else if(*peakPhi==4){
+		 *ECAL_ClusterET=*ECAL_ClusterET-(crystals[0][0]+crystals[1][0]+crystals[0][1]+crystals[1][1]);
+		}	
+	
+
 	}
 	else
 	{std::cout<<"3x5"<<std::endl;
-		for(int dEta = -1; dEta <= 1; dEta++) {
-#pragma HLS UNROLL
-      int eta = *peakEta + dEta;
-        if(eta >= 0 && eta < NCrystalsPerEtaPhi) {
-        	 *ECAL_ClusterET += etaStripSum[eta];
-      }
-  }
+
+	for(int dEta = -1; dEta <= 1; dEta++){
+		#pragma HLS UNROLL
+			  int eta = *peakEta + dEta;
+			  
+			    *ECAL_ClusterET += etaStripSum[eta];
+			  
+			}
+			//*ECAL_ClusterET=*ECAL_ClusterET-(crystals[4][4]+crystals[3][4]);
+	
+ 	if(*peakPhi==1){
+		 	*ECAL_ClusterET=*ECAL_ClusterET-(crystals[0][4]+crystals[1][4]);
+		}
+	else if(*peakPhi==0){
+		 	*ECAL_ClusterET=*ECAL_ClusterET-(crystals[0][3]+crystals[1][3]+crystals[0][4]+crystals[1][4]);
+		}	
+		else if(*peakPhi==3){
+		 	*ECAL_ClusterET=*ECAL_ClusterET-(crystals[0][0]+crystals[1][0]);
+		}
+	else if(*peakPhi==4){
+		 	*ECAL_ClusterET=*ECAL_ClusterET-(crystals[0][0]+crystals[1][0]+crystals[0][1]+crystals[1][1]);
+		}	
+	
+
+	
 	}
 	
 	//ECAL_Cluster2X5 is equal to max of 2X5L or 2X5R
