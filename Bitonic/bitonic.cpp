@@ -508,13 +508,7 @@ void  bitonic_4( ap_fixed<16,9>    Cluster_Deposits[16], uint16_t  Cluster_Peak_
 
 }
 
-struct Cluster{
- ap_fixed<16,9>    ClusterDeposits2[16];
-  uint16_t  ClusterPeakEta2[16];
-  uint16_t  ClusterPeakPhi2[16];
-  uint16_t  ClusterTowerEta2[16];
-  uint16_t  ClusterTowerPhi2[16];
-};
+
 void  TowerPeaks( uint16_t towerET_uncal[16],uint16_t  PeakPhi[16], uint16_t  PeakEta[16], uint16_t  TowerPhi[16], uint16_t  TowerEta[16])
 {
 #pragma HLS PIPELINE II=8
@@ -524,11 +518,11 @@ void  TowerPeaks( uint16_t towerET_uncal[16],uint16_t  PeakPhi[16], uint16_t  Pe
 #pragma HLS ARRAY_PARTITION variable= TowerEta complete dim=0
 #pragma HLS ARRAY_PARTITION variable= TowerPhi complete dim=0
 
- // ap_fixed<16,9>    ClusterDeposits2[16];
- //  uint16_t  ClusterPeakEta2[16];
- //  uint16_t  ClusterPeakPhi2[16];
- //  uint16_t  ClusterTowerEta2[16];
- //  uint16_t  ClusterTowerPhi2[16];
+ ap_fixed<16,9>    ClusterDeposits2[16];
+   uint16_t  ClusterPeakEta2[16];
+   uint16_t  ClusterPeakPhi2[16];
+   uint16_t  ClusterTowerEta2[16];
+   uint16_t  ClusterTowerPhi2[16];
   for(int i=0;i<16;i++)
 {
    ClusterDeposits2[i]=0;
