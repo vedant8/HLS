@@ -542,7 +542,7 @@ void  bitonic_16( Cluster arr[16])
 
     }
  
-bitonic_32(arr);
+//bitonic_32(arr);
 
   }
 
@@ -889,7 +889,7 @@ void  bitonic_8( Cluster arr[16])
            arr[i+1].TowerPhi=temp;
       }
   }
-  bitonic_16( arr);
+ // bitonic_16( arr);
 }
 void  bitonic_4( Cluster arr[16])
 {
@@ -1072,18 +1072,18 @@ for(int i=24;i<26;i++)
               {temp= arr[i].Deposits;
                arr[i].Deposits= arr[i+1].Deposits;
                arr[i+1].Deposits=temp;
-              //   temp= arr[i].PeakEta;
-              //  arr[i].PeakEta= arr[i+1].PeakEta;
-              //  arr[i+1].PeakEta=temp;
-              // temp= arr[i].PeakPhi;
-              //  arr[i].PeakPhi= arr[i+1].PeakPhi;
-              //  arr[i+1].PeakPhi=temp;
-              //    temp= arr[i].TowerEta;
-              //  arr[i].TowerEta= arr[i+1].TowerEta;
-              //  arr[i+1].TowerEta=temp;
-              // temp= arr[i].TowerPhi;
-              //  arr[i].TowerPhi= arr[i+1].TowerPhi;
-              //  arr[i+1].TowerPhi=temp;
+               temp= arr[i].PeakEta;
+               arr[i].PeakEta= arr[i+1].PeakEta;
+               arr[i+1].PeakEta=temp;
+               temp= arr[i].PeakPhi;
+               arr[i].PeakPhi= arr[i+1].PeakPhi;
+               arr[i+1].PeakPhi=temp;
+               temp= arr[i].TowerEta;
+               arr[i].TowerEta= arr[i+1].TowerEta;
+               arr[i+1].TowerEta=temp;
+               temp= arr[i].TowerPhi;
+               arr[i].TowerPhi= arr[i+1].TowerPhi;
+               arr[i+1].TowerPhi=temp;
               }
   }
   for(int i=4;i<7;i=i+2)
@@ -1347,7 +1347,8 @@ temp= arr[i+2].TowerPhi;
 
     // passing control to second level of quaternary comparators
      bitonic_4(arr);
-
+     bitonic_16(arr);
+     bitonic_32(arr);
     for(int i=0;i<32;i++)
 {
   #pragma HLS unroll
