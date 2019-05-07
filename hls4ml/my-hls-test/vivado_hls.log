@@ -1,0 +1,143 @@
+================================================================
+  Vivado(TM) HLS - High-Level Synthesis from C, C++ and SystemC
+  Version 2017.2
+  Build 1909853 on Thu Jun 15 18:55:24 MDT 2017
+  Copyright (C) 1986-2017 Xilinx, Inc. All Rights Reserved.
+================================================================
+INFO: [HLS 200-10] Running 'G:/Xilinx/Vivado_HLS/2017.2/bin/unwrapped/win64.o/vivado_hls.exe'
+INFO: [HLS 200-10] For user 'Vedant Basu' on host 'desktop-a7vmdiu' (Windows NT_amd64 version 6.2) on Tue May 07 11:55:17 +0530 2019
+INFO: [HLS 200-10] In directory 'G:/Physics/Particle_Physics/B-Physics/hls4ml-bdt/sklearn-to-hls/my-hls-test'
+INFO: [HLS 200-10] Opening and resetting project 'G:/Physics/Particle_Physics/B-Physics/hls4ml-bdt/sklearn-to-hls/my-hls-test/myproject_prj'.
+INFO: [HLS 200-10] Adding design file 'firmware/myproject.cpp' to the project
+INFO: [HLS 200-10] Adding test bench file 'myproject_test.cpp' to the project
+INFO: [HLS 200-10] Opening and resetting solution 'G:/Physics/Particle_Physics/B-Physics/hls4ml-bdt/sklearn-to-hls/my-hls-test/myproject_prj/solution1'.
+INFO: [HLS 200-10] Cleaning up the solution database.
+INFO: [HLS 200-10] Setting target device to 'xc7vx690tffg1927-2'
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 5ns.
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch GCC as the compiler.
+   Compiling ../../../../myproject_test.cpp in debug mode
+   Compiling ../../../../firmware/myproject.cpp in debug mode
+   Generating csim.exe
+In file included from G:/Xilinx/Vivado_HLS/2017.2/include/floating_point_v7_0_bitacc_cmodel.h:143:0,
+                 from G:/Xilinx/Vivado_HLS/2017.2/include/hls_fpo.h:172,
+                 from G:/Xilinx/Vivado_HLS/2017.2/include/hls_half.h:57,
+                 from G:/Xilinx/Vivado_HLS/2017.2/include/ap_int.h:74,
+                 from G:/Xilinx/Vivado_HLS/2017.2/include/ap_fixed.h:67,
+                 from G:/Physics/Particle_Physics/B-Physics/hls4ml-bdt/bdt_utils/BDT.h:4,
+                 from ../../../../myproject_test.cpp:1:
+G:/Xilinx/Vivado_HLS/2017.2/include/gmp.h:62:0: warning: "__GMP_LIBGMP_DLL" redefined [enabled by default]
+G:/Xilinx/Vivado_HLS/2017.2/include/floating_point_v7_0_bitacc_cmodel.h:135:0: note: this is the location of the previous definition
+In file included from G:/Xilinx/Vivado_HLS/2017.2/include/floating_point_v7_0_bitacc_cmodel.h:143:0,
+                 from G:/Xilinx/Vivado_HLS/2017.2/include/hls_fpo.h:172,
+                 from G:/Xilinx/Vivado_HLS/2017.2/include/hls_half.h:57,
+                 from G:/Xilinx/Vivado_HLS/2017.2/include/ap_int.h:74,
+                 from G:/Xilinx/Vivado_HLS/2017.2/include/ap_fixed.h:67,
+                 from G:/Physics/Particle_Physics/B-Physics/hls4ml-bdt/bdt_utils/BDT.h:4,
+                 from ../../../../firmware/myproject.cpp:1:
+G:/Xilinx/Vivado_HLS/2017.2/include/gmp.h:62:0: warning: "__GMP_LIBGMP_DLL" redefined [enabled by default]
+G:/Xilinx/Vivado_HLS/2017.2/include/floating_point_v7_0_bitacc_cmodel.h:135:0: note: this is the location of the previous definition
+1.75977, 0, 
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-10] Analyzing design file 'firmware/myproject.cpp' ... 
+WARNING: [HLS 200-40] In file included from firmware/myproject.cpp:1:
+In file included from G:/Physics/Particle_Physics/B-Physics/hls4ml-bdt/bdt_utils\BDT.h:4:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/include\ap_fixed.h:67:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/include/ap_int.h:74:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/include/hls_half.h:220:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\algorithm:62:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\bits/stl_algo.h:63:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\bits/stl_tempbuf.h:61:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\bits/stl_construct.h:60:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\new:41:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\exception:150:
+G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\exception_ptr.h:132:13: error: unknown type name 'type_info'
+      const type_info*
+            ^
+In file included from firmware/myproject.cpp:1:
+In file included from G:/Physics/Particle_Physics/B-Physics/hls4ml-bdt/bdt_utils\BDT.h:4:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/include\ap_fixed.h:67:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/include/ap_int.h:74:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/include/hls_half.h:220:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\algorithm:62:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\bits/stl_algo.h:63:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\bits/stl_tempbuf.h:61:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\bits/stl_construct.h:60:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\new:41:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\exception:151:
+G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\nested_exception.h:62:5: error: the parameter for this explicitly-defaulted copy constructor is const, but a member or base requires it to be non-const
+    nested_exception(const nested_exception&) = default;
+    ^
+G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\nested_exception.h:64:23: error: the parameter for this explicitly-defaulted copy assignment operator is const, but a member or base requires it to be non-const
+    nested_exception& operator=(const nested_exception&) = default;
+                      ^
+G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\nested_exception.h:77:28: error: exception specification in declaration does not match previous declaration
+  inline nested_exception::~nested_exception() = default;
+                           ^
+G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\nested_exception.h:66:20: note: previous declaration is here
+    inline virtual ~nested_exception();
+                   ^
+G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\nested_exception.h:122:61: error: redefinition of default argument
+    __throw_with_nested(_Ex&& __ex, const nested_exception* = 0)
+                                                            ^ ~
+G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\nested_exception.h:110:56: note: previous definition is here
+    __throw_with_nested(_Ex&&, const nested_exception* = 0)
+                                                       ^ ~
+5 errors generated.
+ERROR: [HLS 200-70] Compilation errors found:
+Pragma processor failed: In file included from firmware/myproject.cpp:1:
+In file included from G:/Physics/Particle_Physics/B-Physics/hls4ml-bdt/bdt_utils\BDT.h:4:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/include\ap_fixed.h:67:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/include/ap_int.h:74:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/include/hls_half.h:220:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\algorithm:62:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\bits/stl_algo.h:63:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\bits/stl_tempbuf.h:61:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\bits/stl_construct.h:60:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\new:41:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\exception:150:
+G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\exception_ptr.h:132:13: error: unknown type name 'type_info'
+      const type_info*
+            ^
+In file included from firmware/myproject.cpp:1:
+In file included from G:/Physics/Particle_Physics/B-Physics/hls4ml-bdt/bdt_utils\BDT.h:4:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/include\ap_fixed.h:67:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/include/ap_int.h:74:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/include/hls_half.h:220:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\algorithm:62:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\bits/stl_algo.h:63:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\bits/stl_tempbuf.h:61:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\bits/stl_construct.h:60:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\new:41:
+In file included from G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\exception:151:
+G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\nested_exception.h:62:5: error: the parameter for this explicitly-defaulted copy constructor is const, but a member or base requires it to be non-const
+    nested_exception(const nested_exception&) = default;
+    ^
+G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\nested_exception.h:64:23: error: the parameter for this explicitly-defaulted copy assignment operator is const, but a member or base requires it to be non-const
+    nested_exception& operator=(const nested_exception&) = default;
+                      ^
+G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\nested_exception.h:77:28: error: exception specification in declaration does not match previous declaration
+  inline nested_exception::~nested_exception() = default;
+                           ^
+G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\nested_exception.h:66:20: note: previous declaration is here
+    inline virtual ~nested_exception();
+                   ^
+G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\nested_exception.h:122:61: error: redefinition of default argument
+    __throw_with_nested(_Ex&& __ex, const nested_exception* = 0)
+                                                            ^ ~
+G:/Xilinx/Vivado_HLS/2017.2/win64/tools/clang/bin\..\lib\clang\3.1/../../../include/c++/4.5.2\nested_exception.h:110:56: note: previous definition is here
+    __throw_with_nested(_Ex&&, const nested_exception* = 0)
+                                                       ^ ~
+5 errors generated.
+Failed checking during preprocessing.
+    while executing
+"source build_prj.tcl"
+    invoked from within
+"hls::main build_prj.tcl"
+    ("uplevel" body line 1)
+    invoked from within
+"uplevel 1 hls::main {*}$args"
+    (procedure "hls_proc" line 5)
+    invoked from within
+"hls_proc $argv"
